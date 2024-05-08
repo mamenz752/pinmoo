@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('moods', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('mood');
+            $table->string('image_path');
+            $table->string('classification');
         });
     }
 
