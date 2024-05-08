@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->boolean('is_stared');
-            $table->foeignId('post_id')->constrained()->nullable();
+            $table->foreignId('post_id')->constrained()->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });
