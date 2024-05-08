@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title');
+            $table->text('body');
+            $table->boolean('is_stared');
+            $table->foeignId('post_id')->constrained();
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
+            $table->softDeletes('deleted_at');
         });
     }
 
