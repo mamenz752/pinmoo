@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreignId('followed_id')->constrained(
                 table: 'users', indexName: 'user_id'
             );
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
+
         });
     }
 

@@ -19,8 +19,7 @@ return new class extends Migration
             $table->text('body');
             $table->boolean('is_stared');
             $table->foeignId('post_id')->constrained()->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
             $table->softDeletes('deleted_at');
         });
     }
