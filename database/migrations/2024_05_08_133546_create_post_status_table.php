@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foeignId('post_id')->constrained();
             $table->foeignId('status_id')->constrained();
-            $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 
