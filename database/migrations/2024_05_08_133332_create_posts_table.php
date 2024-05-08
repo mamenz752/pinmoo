@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('mood_id')->constrained();
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->timestamps('created_at');
             $table->timestamps('updated_at');
             $table->softDeletes('deleted_at');
