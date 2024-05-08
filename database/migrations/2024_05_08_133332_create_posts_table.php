@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('mood_id')->constrained();
+            $table->string('comment');
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
+            $table->softDeletes('deleted_at');
         });
     }
 
