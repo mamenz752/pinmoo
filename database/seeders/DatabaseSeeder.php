@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\Mood::truncate();
-        
         $this->call(MoodSeeder::class);
         $this->call(StatusSeeder::class);
     }
