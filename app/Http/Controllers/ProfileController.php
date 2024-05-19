@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Cloudinary;
 
 class ProfileController extends Controller
 {
@@ -29,6 +30,9 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        dd($image_url);
+        
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {

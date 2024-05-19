@@ -29,7 +29,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="mt-6 space-y-6" enctype="multipart/form-data">
+                <div>
+                    <input type="file" name="image" />
+                </div>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
