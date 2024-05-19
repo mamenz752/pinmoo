@@ -30,14 +30,16 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        dd($image_url);
-        
-        $request->user()->fill($request->validated());
+        if ($request->has('image_path')) {
+            $image_url = Cloudinary::upload($request->file('image_path')->getRealPath())->getSecurePath();
+            $request->user()->image_path = $image_url;
+        }
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
+
+        $request->user()->fill($request->validated());
 
         $request->user()->save();
 
