@@ -39,13 +39,25 @@ export default function Welcome(props) {
                         <Logo />
                     </div>
 
-                    <div className="mt-16">
+                    <div className="mt-8">
+                        <div className="my-8 flex justify-center font-bold">
+                            <p>pinmooで自分の気分をシェアしてみよう</p>
+                        </div>
                         
+                        <div className="flex justify-center">
+                            <Link
+                                href={route('register')}
+                                className="px-8 py-4 bg-pi-blue text-white font-bold rounded-lg"
+                            >
+                                今すぐ始める
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-                        <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
-                        </div>
+                        <p className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
+                           &copy; 2024 pinmoo All rights reserved. 
+                        </p>
 
                         <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
                             Laravel v{props.laravelVersion} (PHP v{props.phpVersion})
