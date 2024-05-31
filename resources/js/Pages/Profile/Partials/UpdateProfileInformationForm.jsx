@@ -11,13 +11,13 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
-        imagePath: user.image_path,
+        image_path: user.image_path,
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch('/profile.update');
     };
 
     return (
@@ -32,18 +32,18 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
             <form onSubmit={submit} className="mt-6 space-y-6" enctype="multipart/form-data">
                 <div>
-                    <InputLabel htmlFor="imagePath" value="Image" />
+                    <InputLabel htmlFor="image_path" value="Image" />
                     
                     <input
                         type="file"
-                        id="imagePath"
+                        id="image_path"
                         className="mt-1 block w-full"
                         name="image_path"
                         value={data.image_path}
-                        onChange={(e) => setData('imagePath', e.target.value)}
+                        onChange={(e) => setData('image_path', e.target.value)}
                         />
                     
-                    <InputError className="mt-2" message={errors.imagePath} />
+                    <InputError className="mt-2" message={errors.image_path} />
                 </div>
                 
                 <div>
