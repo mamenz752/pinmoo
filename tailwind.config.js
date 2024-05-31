@@ -21,6 +21,7 @@ module.exports = {
                 'pi-green': '#0DB85C',
                 'pi-blue': '#0E89FD',
                 'pi-dark-blue': "#07008C",
+                'pi-black': "#333333",
             }
         },
     },
