@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,9 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [PostController::class, "index"])->name('dashboard');
+    // Route::get("/posts", [PostController::class, "index"]);
+});
 
 Route::get('/diary', function () {
     return Inertia::render('Diary');
