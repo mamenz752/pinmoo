@@ -32,13 +32,18 @@ Route::middleware('auth')->group(function () {
     Route::post("/posts", [PostController::class, "store"]);
 });
 
-Route::get('/diary', function () {
-    return Inertia::render('Diary');
-})->middleware(['auth', 'verified'])->name('diary');
+Route::middleware('auth')->group(function () {
+    Route::get('/diary', function () {
+        return Inertia::render('Diary');
+    })->name('diary');
+});
 
-Route::get('/analysis', function () {
-    return Inertia::render('Analysis');
-})->middleware(['auth', 'verified'])->name('analysis');
+Route::middleware('auth')->group(function () {
+    Route::get('/analysis', function () {
+        return Inertia::render('Analysis');
+    })->name('analysis');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
