@@ -34,6 +34,7 @@ export default function Dashboard(props) {
                         </div>
                         <form
                             onSubmit={handleSendPosts}
+                            className="py-4 flex flex-col items-center"
                         >
                             <fieldset
                                 name="mood_id"
@@ -43,11 +44,12 @@ export default function Dashboard(props) {
                                     { moods.map((mood) => (
                                         <div
                                             key={mood.id}
+                                            className="flex flex-col items-center"
                                         >
                                             <input
                                                 type="radio"
                                                 id={mood.id}
-                                                className="w-16"
+                                                className="w-4 h-4"
                                                 name="mood_id"
                                                 value={mood.id}
                                             />
@@ -61,6 +63,7 @@ export default function Dashboard(props) {
                             </fieldset>
                             <button
                                 type="submit"
+                                className="p-2 flex justify-center rounded-lg bg-pi-blue text-white"
                             >
                                 記録する
                             </button>
