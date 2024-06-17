@@ -1,10 +1,19 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import QuickStatus from '@/Pages/QuickStatus/QuickStatus'
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 
 export default function Dashboard(props) {
     const { moods } = props;
-    console.log(props);
+    
+    const {data, setData, post} = useForm({
+        user_id: props.auth.user.id,
+        mood_id: "",
+        comment: ""
+    })
+    
+    const handleSendPosts = () => {
+        post("/posts");
+    }
     
     return (
         <AuthenticatedLayout
@@ -24,19 +33,37 @@ export default function Dashboard(props) {
                             <p className="text-lg">今の気分をシェアしましょう</p>
                         </div>
                         <form
+                            onSubmit={handleSendPosts}
                         >
-                            <div
+                            <fieldset
+                                name="mood_id"
+                                onChange={(e) => setData("mood_id", e.target.value)}
                                 className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
                             >
-                                { moods.map((mood) => (
-                                    <button
-                                        key={mood.id}
-                                        className="w-16"
-                                    >
-                                       <img src={mood.image_path} />
-                                    </button>
-                                )) }
-                            </div>
+                                    { moods.map((mood) => (
+                                        <div
+                                            key={mood.id}
+                                        >
+                                            <input
+                                                type="radio"
+                                                id={mood.id}
+                                                className="w-16"
+                                                name="mood_id"
+                                                value={mood.id}
+                                            />
+                                            <label
+                                                htmlFor={mood.id}
+                                            >
+                                                <img src={mood.image_path} />
+                                            </label>
+                                        </div>
+                                    )) }
+                            </fieldset>
+                            <button
+                                type="submit"
+                            >
+                                記録する
+                            </button>
                         </form>
                     </div>
                 </div>

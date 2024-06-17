@@ -28,7 +28,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PostController::class, "index"])->name('dashboard');
-    // Route::get("/posts", [PostController::class, "index"]);
+    
+    Route::post("/posts", [PostController::class, "store"]);
 });
 
 Route::get('/diary', function () {
