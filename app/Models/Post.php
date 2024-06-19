@@ -14,4 +14,9 @@ class Post extends Model
         "mood_id",
         "comment"
     ];
+    
+    public function statuses()
+    {
+        return $this->belongsToMany(Status::class);
+    }
 }

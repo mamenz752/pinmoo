@@ -1,17 +1,22 @@
+import {useState} from "react";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import QuickStatus from '@/Pages/QuickStatus/QuickStatus'
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Dashboard(props) {
-    const { moods } = props;
+    const { moods, post } = props;
+    const [currentMood, setCurrentMood] = useState(moods.filter((mood) => mood.id == post.mood_id));
     
-    const {data, setData, post} = useForm({
+    console.log(currentMood);
+    
+    const {data, setData} = useForm({
         user_id: props.auth.user.id,
         mood_id: "",
         comment: ""
     })
     
-    const handleSendPosts = () => {
+    const handleSendPosts = (e) => {
+        e.preventDefault();
         post("/posts");
     }
     
@@ -25,6 +30,8 @@ export default function Dashboard(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    
+                    {/* ここからクイックステータス */}
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="py-6 flex items-center justify-center gap-2">
                             <svg width="4rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,6 +76,29 @@ export default function Dashboard(props) {
                             </button>
                         </form>
                     </div>
+                    {/* ここまでクイックステータス */}
+                    
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                       <h2>じぶんのきぶん</h2>
+                       <div className="flex gap-4">
+                           <p>{post.comment}</p>
+                           <img 
+                                src={currentMood.image_path}
+                                className="w-10 h-10"
+                            />
+                           { /* この${id}が正しく取得できているかを調べる */}
+                           <Link href={`/posts/{post.id}/edit`}>
+                                <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                           </Link>
+                       </div>
+                    </div>
+                    
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                       <h2>ともだちのきぶん</h2>
+                    </div>
+                    
                 </div>
             </div>
         </AuthenticatedLayout>
