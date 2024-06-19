@@ -10,9 +10,24 @@ use Inertia\Response;
 
 class PostController extends Controller
 {
-    public function index(Mood $mood)
+    public function index(Mood $mood, Post $post)
     {
-        return Inertia::render("Dashboard", ["moods" => $mood->get()]);
+        return Inertia::render("Dashboard", [
+                    "moods" => $mood->get(),
+                    "post" => $post->orderBy('created_at', 'desc')->first()
+                ]);
+    }
+    
+    public function edit(Mood $mood, Post $post)
+    {
+        return Inertia::render("Post/Edit", ["moods" => $mood->get(), "post" => $post]);
+    }
+    
+    public function update(PostRequest $request, Post $post)
+    {
+        $input = $request->all();
+        $post->fill($input)->save();
+        return redirect("/posts/" . $post->id);
     }
     
     public function store(Request $request, Post $post)

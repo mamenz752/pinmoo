@@ -29,7 +29,10 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PostController::class, "index"])->name('dashboard');
     
-    Route::post("/posts", [PostController::class, "store"]);
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
+    Route::put('/posts/{post}', [PostController::class, 'update']);
+    
+    Route::post('/posts', [PostController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {

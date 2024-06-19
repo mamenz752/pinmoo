@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
+    
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
