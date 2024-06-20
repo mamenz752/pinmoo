@@ -20,9 +20,9 @@ export default function Edit(props) {
          <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">感情を編集する</h2>}
         >
-            <Head title="Dashboard" />
+            <Head title="感情を編集する" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -36,13 +36,11 @@ export default function Edit(props) {
                     
                     <form
                         onSubmit={handleSendPosts}
-                        
+                        className="mt-4 p-4 flex flex-col items-center bg-white overflow-hidden shadow-sm sm:rounded-lg"
                     >
-                        
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
+                        <h1 className="p-6 text-gray-900 text-lg font-bold">
                             感情を変更する
-                        </div>
+                        </h1>
                         
                         
                         <fieldset
@@ -70,60 +68,54 @@ export default function Edit(props) {
                                         </div>
                                     )) }
                             </fieldset>
-                            
-                        
-                    </div>
-                    
-                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            ひとこと
-                        </div>
-                        <textarea
-                            name="comment"
-                            value={post.comment}
-                            onChange={(e) => setData("comment", e.target.value)}
-                        >
-                        </textarea>
-                    </div>
-                    
-                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            感じた場面・状況・背景
-                        </div>
-                        
-                        <fieldset
-                                className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
-                                name="status_id"
+    
+                            <h1 className="p-6 text-gray-900 text-lg font-bold">
+                                ひとこと
+                            </h1>
+                            <textarea
+                                className="w-1/2 flex items-center justify-center rounded-sm"
+                                name="comment"
+                                value={post.comment}
+                                onChange={(e) => setData("comment", e.target.value)}
                             >
-                                    { statuses.map((status) => (
-                                        <div
-                                            key={status.id}
-                                            className="flex flex-col items-center"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                id={status.id}
-                                                className="w-4 h-4"
-                                                name="status_id"
-                                                value={status.id}
-                                            />
-                                            <label
-                                                htmlFor={status.id}
+                            </textarea>
+                        
+                            <h1 className="p-6 text-gray-900 text-lg font-bold">
+                                感じた場面・状況・背景
+                            </h1>
+                            
+                            <fieldset
+                                    className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
+                                    name="status_id"
+                                >
+                                        { statuses.map((status) => (
+                                            <div
+                                                key={status.id}
+                                                className="flex flex-col items-center"
                                             >
-                                                <img src={status.image_path} />
-                                                <span>{status.status}</span>
-                                            </label>
-                                        </div>
-                                    )) }
-                            </fieldset>
-                    </div>
-                    
-                    <button
-                        className="p-4 bg-pi-blue text-white"
-                        type="submit"
-                    >
-                        保存する
-                    </button>
+                                                <input
+                                                    type="checkbox"
+                                                    id={status.id}
+                                                    className="w-4 h-4"
+                                                    name="status_id"
+                                                    value={status.id}
+                                                />
+                                                <label
+                                                    htmlFor={status.id}
+                                                >
+                                                    <img src={status.image_path} />
+                                                    <span>{status.status}</span>
+                                                </label>
+                                            </div>
+                                        )) }
+                                </fieldset>
+                        
+                            <button
+                                className="w-1/2 p-2 flex items-center justify-center rounded-sm bg-pi-blue text-white"
+                                type="submit"
+                            >
+                                保存する
+                            </button>
                     </form>
                 </div>
             </div>
