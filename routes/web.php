@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DiaryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,9 +37,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/diary', function () {
-        return Inertia::render('Diary');
-    })->name('diary');
+    Route::get('/diary', [DiaryController::class, 'index'])->name('diary');
+    
+    
 });
 
 Route::middleware('auth')->group(function () {
