@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Diary(props) {
     const { diaries } = props;
@@ -18,13 +18,11 @@ export default function Diary(props) {
                         <div className="p-6 text-gray-900">今までのじぶん日誌</div>
                     </div>
                     
-                    {/*
-                    <Link href={route()}>
+                    <Link href={route("diary.create")}>
                         <div className="">
                             <p>じぶん日誌を書く</p>
                         </div>    
                     </Link>
-                    */}
                     
                     <div
                         className="p-2 border-1 border-pi-black shadow-md rounded-md"
