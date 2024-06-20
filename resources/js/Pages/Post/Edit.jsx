@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Edit(props) {
-    const {moods, post} = props;
+    const {moods, post, statuses} = props;
     
     const {data, setData, put} = useForm({
         user_id: props.auth.user.id,
@@ -91,34 +91,31 @@ export default function Edit(props) {
                             感じた場面・状況・背景
                         </div>
                         
-                        { /*
                         <fieldset
-                                name="mood_id"
-                                onChange={(e) => setData("mood_id", e.target.value)}
                                 className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
+                                name="status_id"
                             >
-                                    { moods.map((mood) => (
+                                    { statuses.map((status) => (
                                         <div
-                                            key={mood.id}
+                                            key={status.id}
                                             className="flex flex-col items-center"
                                         >
                                             <input
-                                                type="radio"
-                                                id={mood.id}
+                                                type="checkbox"
+                                                id={status.id}
                                                 className="w-4 h-4"
-                                                name="mood_id"
-                                                value={mood.id}
-                                                checked={mood.id == post.mood_id}
+                                                name="status_id"
+                                                value={status.id}
                                             />
                                             <label
-                                                htmlFor={mood.id}
+                                                htmlFor={status.id}
                                             >
-                                                <img src={mood.image_path} />
+                                                <img src={status.image_path} />
+                                                <span>{status.status}</span>
                                             </label>
                                         </div>
                                     )) }
                             </fieldset>
-                            */}
                     </div>
                     
                     <button

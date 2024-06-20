@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Models\Mood;
 use App\Models\Post;
+use App\Models\Status;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,11 +20,12 @@ class PostController extends Controller
                 ]);
     }
     
-    public function edit(Mood $mood, Post $post)
+    public function edit(Mood $mood, Post $post, Status $status)
     {
         return Inertia::render("Post/Edit", [
                     "moods" => $mood->get(),
-                    "post" => $post->orderBy('created_at', 'desc')->first()
+                    "post" => $post->orderBy('created_at', 'desc')->first(),
+                    "statuses" => $status->get()
                 ]);
     }
     

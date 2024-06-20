@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import QuickStatus from '@/Pages/QuickStatus/QuickStatus'
 import { Head, Link, useForm } from '@inertiajs/react';
