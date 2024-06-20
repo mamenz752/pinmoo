@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PostController::class, "index"])->name('dashboard');
     
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('/posts/{post}', [PostController::class, 'update']);
+    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     
     Route::post('/posts', [PostController::class, 'store']);
 });
