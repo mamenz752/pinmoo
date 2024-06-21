@@ -25,6 +25,27 @@ class DiaryController extends Controller
         ]);
     }
     
+    public function edit(Diary $diary, Post $post)
+    {
+        return Inertia::render("Diary/Edit", [
+                    "diary" => $diary->where('id', $diary["id"])->first(),
+                    "posts" => $post->get()
+        ]);
+    }
+    
+    public function update(Request $request, Diary $diary)
+    {
+        $input = $request->all();
+        
+        $diary->fill($input)->save();
+        return redirect("/diary");
+    }
+    
+    public function destroy()
+    {
+        
+    }
+    
     public function store(Request $request, Diary $diary)
     {
         $input = $request->all();
