@@ -15,7 +15,7 @@ export default function Diary(props) {
     
     const handleSendPosts = (e) => {
         e.preventDefault();
-        put(`/diary/${diary}/update`);
+        put(route("diary.update", diary.id));
     }
     
     return (
@@ -57,7 +57,7 @@ export default function Diary(props) {
                                     id="title"
                                     type="text"
                                     placeholder="タイトルを入力してください"
-                                    // value={diary.title}
+                                    value={data.title}
                                     onChange={(e) => setData("title", e.target.value)}
                                     className="w-1/2 rounded-lg"
                                 />
@@ -72,7 +72,7 @@ export default function Diary(props) {
                                 <textarea
                                     id="body"
                                     placeholder="自分の気持ちを書き出してみましょう"
-                                    // value={diary.body}
+                                    value={data.body}
                                     onChange={(e) => setData("body", e.target.value)}
                                     className="w-1/2 rounded-lg"
                                 />
@@ -82,7 +82,6 @@ export default function Diary(props) {
                                 <fieldset
                                     name="post_id"
                                     onChange={(e) => setData("post_id", e.target.value)}
-                                    // value={diary.post_id}
                                     className="mx-auto py-6 flex flex-col items-start gap-2"
                                 >
                                         { posts.map((post) => (
@@ -96,7 +95,7 @@ export default function Diary(props) {
                                                         id={post.id}
                                                         className="w-4 h-4"
                                                         name="post_id"
-                                                        value={post.id}
+                                                        value={data.post_id}
                                                     />
                                                     <label
                                                         htmlFor={post.id}
