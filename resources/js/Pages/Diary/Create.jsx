@@ -109,6 +109,7 @@ export default function Diary(props) {
                             </div>
                             
                             <button
+                                type="submit"
                                 className="mt-4 p-4 w-full bg-pi-blue text-white"
                             >
                                 じぶん日誌を保存する
