@@ -5,7 +5,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Dashboard(props) {
     const { moods, post } = props;
-    const [currentMood, setCurrentMood] = useState(moods.filter((mood) => mood.id == post.mood_id));
+    const currentMood = moods.filter((mood) => mood.id == post.mood_id);
     
     console.log(currentMood);
     
@@ -84,7 +84,7 @@ export default function Dashboard(props) {
                            <p>{post.comment}</p>
                            <div className="flex items-center gap-2">
                                <img 
-                                    src={moods.filter((mood) => mood.id == post.mood_id).image_path}
+                                    src={currentMood[0].image_path}
                                     className="w-10 h-10"
                                 />
                                <Link href={route("posts.edit", post.id)}>
