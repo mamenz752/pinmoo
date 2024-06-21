@@ -33,7 +33,7 @@ class PostController extends Controller
     {
         $input = $request->all();
         $post->fill($input)->save();
-        // 別中間テーブルに同じuseFormから値を追加するか、それともuseFormを分けた方がいいのか..
+        $post->statuses()->attach($request->status);
         return redirect("/dashboard");
     }
     

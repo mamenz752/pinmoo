@@ -8,7 +8,8 @@ export default function Edit(props) {
     const {data, setData, put} = useForm({
         user_id: props.auth.user.id,
         mood_id: post.mood_id,
-        comment: post.comment
+        comment: post.comment,
+        status: "hello"
     })
     
     const handleSendPosts = (e) => {
@@ -86,6 +87,7 @@ export default function Edit(props) {
                             
                             <fieldset
                                     className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
+                                    onChange={(e) => setData("status", e.target.value)}
                                     name="status_id"
                                 >
                                         { statuses.map((status) => (
