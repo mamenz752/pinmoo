@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use App\Http\Request\DiaryRequest;
+use App\Models\Post;
 use App\Models\Diary;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,12 +18,14 @@ class DiaryController extends Controller
         ]);
     }
     
-    public function create()
+    public function create(Post $post)
     {
-        return Inertia::render("Diary/Create");
+        return Inertia::render("Diary/Create", [
+                    "posts" => $post->get()
+        ]);
     }
     
-    public function store(DiaryRequest $request, Diary $diary)
+    public function store(Request $request, Diary $diary)
     {
         $input = $request->all();
         

@@ -2,13 +2,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm, Link } from '@inertiajs/react';
 
 export default function Diary(props) {
-    const { diaries } = props;
+    const { diaries, posts } = props;
     
     const {data, setData, post} = useForm({
         title: "",
         body: "",
         is_stared: false,
-        post_id: null
+        post_id: ""
     })
     
     const handleSendPosts = (e) => {
@@ -67,6 +67,34 @@ export default function Diary(props) {
                                     placeholder="自分の気持ちを書き出してみましょう"
                                     onChange={(e) => setData("body", e.target.value)}
                                 />
+                            </div>
+                            
+                            <div>
+                                <fieldset
+                                    name="post_id"
+                                    onChange={(e) => setData("post_id", e.target.value)}
+                                    className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
+                                >
+                                        { posts.map((post) => (
+                                            <div
+                                                key={post.id}
+                                                className="flex flex-col items-center"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    id={post.id}
+                                                    className="w-4 h-4"
+                                                    name="post_id"
+                                                    value={post.id}
+                                                />
+                                                <label
+                                                    htmlFor={post.id}
+                                                >
+                                                    <img src={post.mood_id.image_path} />
+                                                </label>
+                                            </div>
+                                        )) }
+                                </fieldset>
                             </div>
                             
                             <button
