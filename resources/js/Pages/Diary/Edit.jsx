@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm, Link, router } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 
 export default function Diary(props) {
     const { diary, posts } = props;
@@ -14,9 +14,6 @@ export default function Diary(props) {
     const handleSendPosts = (e) => {
         e.preventDefault();
         put(route("diary.update", diary.id));
-    }
-    const handleDeletePost = () => {
-        router.delete(`/diary/${diary.id}/delete`);
     }
 
     return (
@@ -118,13 +115,6 @@ export default function Diary(props) {
                                 className="mt-4 p-4 w-full bg-pi-blue text-white"
                             >
                                 じぶん日誌を保存する
-                            </button>
-                            
-                            <button
-                                className="mt-4 p-4 w-full bg-pi-red text-white"
-                                onClick={() => handleDeletePost}
-                            >
-                                じぶん日誌を削除する
                             </button>
                         </form>
                         
