@@ -43,8 +43,8 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/diary/{diary}/edit', [DiaryController::class, 'edit'])->name('diary.edit');
     Route::put('/diary/{diary}/update', [DiaryController::class, 'update'])->name('diary.update');
-    
     Route::delete('/diary/{diary}/delete', [DiaryController::class, 'destroy'])->name('diary.destroy');
+    
     
     Route::post('/diary/posts', [DiaryController::class, 'store']);
 });

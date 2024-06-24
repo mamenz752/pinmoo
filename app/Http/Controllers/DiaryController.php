@@ -41,9 +41,10 @@ class DiaryController extends Controller
         return redirect("/diary");
     }
     
-    public function destroy()
+    public function destroy(Diary $diary)
     {
-        
+        $diary->delete();
+        return redirect("/diary");
     }
     
     public function store(Request $request, Diary $diary)
