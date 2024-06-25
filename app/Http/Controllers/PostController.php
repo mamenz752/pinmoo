@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         return Inertia::render("Dashboard", [
                     "moods" => $mood->get(),
-                    "post" => $post->orderBy('created_at', 'desc')->first()
+                    "quickpost" => $post->orderBy('created_at', 'desc')->first()
                 ]);
     }
     

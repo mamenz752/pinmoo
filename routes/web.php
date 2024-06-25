@@ -33,20 +33,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     
-    Route::post('/posts', [PostController::class, 'store']);
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/diary', [DiaryController::class, 'index'])->name('diary');
     
     Route::get('/diary/create', [DiaryController::class, 'create'])->name('diary.create');
+    Route::post('/diary/posts', [DiaryController::class, 'store']);
     
     Route::get('/diary/{diary}/edit', [DiaryController::class, 'edit'])->name('diary.edit');
     Route::put('/diary/{diary}/update', [DiaryController::class, 'update'])->name('diary.update');
     Route::delete('/diary/{diary}/delete', [DiaryController::class, 'destroy'])->name('diary.destroy');
-    
-    
-    Route::post('/diary/posts', [DiaryController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
