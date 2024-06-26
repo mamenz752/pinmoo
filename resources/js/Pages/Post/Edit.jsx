@@ -9,12 +9,39 @@ export default function Edit(props) {
         user_id: props.auth.user.id,
         mood_id: post.mood_id,
         comment: post.comment,
-        status: "hello"
+        status_id: "1"
     })
+    
+    // console.log(data)
     
     const handleSendPosts = (e) => {
         e.preventDefault();
         put(route("posts.update", post.id));
+    }
+    
+    const changeSituationEnToJp = (situation) => {
+        switch (situation) {
+            case "friends":
+                return "友人";
+            case "family":
+                return "家族";
+            case "lover":
+                return "恋人";
+            case "sunny":
+                return "晴れ";
+            case "cloudy":
+                return "曇り";
+            case "rainy":
+                return "雨";
+            case "study":
+                return "勉強";
+            case "exam":
+                return "試験";
+            case "project":
+                return "プロジェクト";
+            default:
+                return "仕事";
+        }
     }
     
     return (
@@ -27,10 +54,13 @@ export default function Edit(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="sm:rounded-lg">
                         <Link href={route("dashboard")}>
-                            <div className="p-6 text-gray-900">
-                                ひとつ前に戻る
+                            <div className="p-2 flex items-center justify-center gap-2 border border-gray text-gray-900 bg-white rounded-full">
+                                <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 12H4M4 12L10 18M4 12L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>ひとつ前に戻る</span>
                             </div>
                         </Link>
                     </div>
@@ -46,8 +76,8 @@ export default function Edit(props) {
                         
                         <fieldset
                                 name="mood_id"
-                                onChange={(e) => setData("mood_id", e.target.value)}
-                                className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
+                                // onChange={(e) => setData("mood_id", e.target.value)}
+                                className="mx-auto py-6 w-[40%] grid items-center justify-center grid-cols-5 gap-2"
                             >
                                     { moods.map((mood) => (
                                         <div
@@ -57,9 +87,11 @@ export default function Edit(props) {
                                             <input
                                                 type="radio"
                                                 id={mood.id}
+                                                onChange={(e) => setData("mood_id", e.target.value)}
                                                 className="w-4 h-4"
                                                 name="mood_id"
                                                 value={mood.id}
+                                                defaultChecked={data.mood_id === mood.id}
                                             />
                                             <label
                                                 htmlFor={mood.id}
@@ -74,9 +106,10 @@ export default function Edit(props) {
                                 ひとこと
                             </h1>
                             <textarea
-                                className="w-1/2 flex items-center justify-center rounded-sm"
+                                className="w-1/2 flex items-center justify-center rounded-lg"
                                 name="comment"
-                                value={post.comment}
+                                value={data.comment}
+                                placeholder="何か伝えたいことはありますか？"
                                 onChange={(e) => setData("comment", e.target.value)}
                             >
                             </textarea>
@@ -86,8 +119,8 @@ export default function Edit(props) {
                             </h1>
                             
                             <fieldset
-                                    className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
-                                    onChange={(e) => setData("status", e.target.value)}
+                                    className="mx-auto py-6 w-[40%] grid items-center justify-center grid-cols-5 gap-2"
+                                    // onChange={(e) => setData("status_id", e.target.value)}
                                     name="status_id"
                                 >
                                         { statuses.map((status) => (
@@ -98,22 +131,25 @@ export default function Edit(props) {
                                                 <input
                                                     type="checkbox"
                                                     id={status.id}
+                                                    onChange={(e) => setData("status_id", e.target.value)}
                                                     className="w-4 h-4"
                                                     name="status_id"
                                                     value={status.id}
+                                                    // defaultChecked={data.status_id.some(item => item === status.id)}
                                                 />
                                                 <label
                                                     htmlFor={status.id}
+                                                    className="flex flex-col items-center"
                                                 >
                                                     <img src={status.image_path} />
-                                                    <span>{status.status}</span>
+                                                    <span>{changeSituationEnToJp(status.status)}</span>
                                                 </label>
                                             </div>
                                         )) }
                                 </fieldset>
                         
                             <button
-                                className="w-1/2 p-2 flex items-center justify-center rounded-sm bg-pi-blue text-white"
+                                className="w-1/2 p-4 flex items-center justify-center rounded-md bg-pi-blue text-white shadow-md"
                                 type="submit"
                             >
                                 保存する

@@ -3,6 +3,7 @@ import { Head, useForm, Link } from '@inertiajs/react';
 
 export default function Diary(props) {
     const { diary, posts } = props;
+    // const [currentMood, setCurrentMood] = useState(moods.filter((mood) => mood.id == quickpost.mood_id));
     
     const {data, setData, put} = useForm({
         title: diary.title,
@@ -26,9 +27,9 @@ export default function Diary(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div>
+                    <div className="sm:rounded-lg">
                         <Link href={route("diary")}>
-                            <div className="p-6 flex items-center gap-2 border-2 border-gray text-gray-900 bg-white rounded-full">
+                            <div className="p-2 flex items-center justify-center gap-2 border border-gray text-gray-900 bg-white rounded-full">
                                 <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M20 12H4M4 12L10 18M4 12L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -37,15 +38,14 @@ export default function Diary(props) {
                         </Link>
                     </div>
                     
-                    <div className="mt-4 p-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            じぶん日誌を編集する
-                        </div>
+                    <div className="mt-4 px-4 py-2 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <h2 className="p-4 text-lg font-bold border-b border-gray-200">じぶん日誌を編集する</h2>
                     
                         <form
                             onSubmit={handleSendPosts}
+                            className="w-full mx-auto"
                         >
-                            <div className="flex flex-col gap-2">
+                            <div className="mt-4 mx-auto w-2/3 flex flex-col gap-2">
                                 <label
                                     htmlFor="title"
                                 >
@@ -57,11 +57,11 @@ export default function Diary(props) {
                                     placeholder="タイトルを入力してください"
                                     value={data.title}
                                     onChange={(e) => setData("title", e.target.value)}
-                                    className="w-1/2 rounded-lg"
+                                    className="rounded-lg"
                                 />
                             </div>
                             
-                            <div className="mt-4 flex flex-col gap-2">
+                            <div className="mt-4 mx-auto w-2/3 flex flex-col gap-2">
                                 <label
                                     htmlFor="body"
                                 >
@@ -72,15 +72,21 @@ export default function Diary(props) {
                                     placeholder="自分の気持ちを書き出してみましょう"
                                     value={data.body}
                                     onChange={(e) => setData("body", e.target.value)}
-                                    className="w-1/2 rounded-lg"
+                                    className="rounded-lg"
                                 />
                             </div>
                             
-                            <div>
+                            <div className="mx-auto py-6 w-2/3 flex flex-col items-start gap-2">
+                                <label
+                                    htmlFor="post_id"
+                                >
+                                    感情とリレーションする
+                                </label>
                                 <fieldset
+                                    id="post_id"
                                     name="post_id"
                                     onChange={(e) => setData("post_id", e.target.value)}
-                                    className="mx-auto py-6 flex flex-col items-start gap-2"
+                                    className="flex flex-col items-start gap-2"
                                 >
                                         { posts.map((post) => (
                                             <div
@@ -101,7 +107,7 @@ export default function Diary(props) {
                                                         <img src={post.mood_id.image_path} />
                                                     </label>
                                                 </div>
-                                                <div className="flex items-center justify-between gap-4">
+                                                <div className="w-full flex items-center justify-between gap-4">
                                                     <p>{post.comment}</p>
                                                     <p>{post.created_at}</p>
                                                 </div>
@@ -112,7 +118,7 @@ export default function Diary(props) {
                             
                            <button
                                 type="submit"
-                                className="mt-4 p-4 w-full bg-pi-blue text-white"
+                                className="mt-4 p-4 w-full bg-pi-blue text-white rounded-md shadow-md"
                             >
                                 じぶん日誌を保存する
                             </button>

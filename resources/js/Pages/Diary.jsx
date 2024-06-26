@@ -21,7 +21,7 @@ export default function Diary(props) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <Link href={route("diary.create")}>
-                        <div className="mt-4 p-4 w-full flex items-center justify-center gap-2 bg-pi-blue rounded-lg text-white">
+                        <div className="mt-4 p-4 w-full flex items-center justify-center gap-2 bg-pi-blue rounded-lg text-white shadow-md">
                             <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 5V19M5 12H19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
