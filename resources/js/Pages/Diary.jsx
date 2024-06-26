@@ -20,10 +20,6 @@ export default function Diary(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">今までのじぶん日誌</div>
-                    </div>
-                    
                     <Link href={route("diary.create")}>
                         <div className="mt-4 p-4 w-full flex items-center justify-center gap-2 bg-pi-blue rounded-lg text-white">
                             <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,17 +29,17 @@ export default function Diary(props) {
                         </div>    
                     </Link>
                     
-                    <div className="mt-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="mt-4 overflow-hidden sm:rounded-lg">
                         {
                             diaries.map((diary) => {
                                 return (
                                     <div
                                         key={diary.id}
-                                        className="p-2 shadow-md rounded-sm"
+                                        className="mt-4 p-2 shadow-md rounded-md bg-white"
                                     >
-                                        <div className="flex items-center justify-between border-b-2 border-gray">
-                                            <h1 className="px-2">{diary.title}</h1>
-                                            <div className="p-2 flex gap-2">
+                                        <div className="flex items-center justify-between border-b border-gray-200">
+                                            <h1 className="px-2 text-lg font-bold">{diary.title}</h1>
+                                            <div className="p-2 flex gap-4">
                                                 <form>
                                                     <button
                                                         type="submit"
@@ -64,7 +60,7 @@ export default function Diary(props) {
                                                 </Link>
                                             </div>
                                         </div>
-                                        <div className="p-2">
+                                        <div className="mt-4 p-2">
                                             <p>{diary.body}</p>
                                             <p className="text-right">{diary.created_at}</p>
                                         </div>
