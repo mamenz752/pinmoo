@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -7,6 +8,7 @@ import { Transition } from '@headlessui/react';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
     const user = usePage().props.auth.user;
+    const [image, setImage] = useState(null);
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
@@ -16,9 +18,17 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     const submit = (e) => {
         e.preventDefault();
-
-        patch("{{route('profile.update')}}");
+        patch(route("profile.update"));
     };
+    
+    const handleImage = (e) => {
+        setImage(e.target.files[e.target.files.length - 1]);
+    }
+    
+    const getImagePath = (image) => {
+        const file = image;
+        return file.prototype.webkitRelativePath;
+    } 
 
     return (
         <section className={className}>
@@ -40,7 +50,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         className="mt-1 block w-full"
                         name="image_path"
                         value={data.image_path}
-                        onChange={(e) => setData('image_path', e.target.value)}
+                        onChange={(e) => {handleImage; getImagePath(image); setData('image_path', image)}}
                         />
                     
                     <InputError className="mt-2" message={errors.image_path} />
