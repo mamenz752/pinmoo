@@ -30,7 +30,7 @@ export default function Dashboard(props) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     
-                    {/* QuickStatus */}
+                    {/* ここからクイックステータス */}
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="py-6 flex items-center justify-center gap-2">
                             <svg width="4rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@ export default function Dashboard(props) {
                             <fieldset
                                 name="mood_id"
                                 onChange={(e) => setData("mood_id", e.target.value)}
-                                className="mx-auto w-[40%] grid items-center justify-center grid-cols-5 gap-2"
+                                className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
                             >
                                     { moods.map((mood) => (
                                         <div
@@ -69,7 +69,7 @@ export default function Dashboard(props) {
                             </fieldset>
                             <button
                                 type="submit"
-                                className="mt-4 w-1/3 p-2 flex justify-center rounded-md shadow-md bg-pi-blue text-white"
+                                className="w-1/2 p-2 flex justify-center rounded-sm bg-pi-blue text-white"
                             >
                                 記録する
                             </button>
@@ -78,17 +78,17 @@ export default function Dashboard(props) {
                     {/* ここまでクイックステータス */}
                     
                     <div className="mt-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                       <h2 className="p-4 text-lg font-bold border-b border-gray-200">じぶんのきぶん</h2>
+                       <h2 className="p-4 text-lg font-bold">じぶんのきぶん</h2>
                        <div className="p-4 flex items-center justify-between gap-4">
                            <p>{quickpost.comment}</p>
-                           <div className="flex items-center gap-4">
+                           <div className="flex items-center gap-2">
                                <img 
                                     src={currentMood[0].image_path}
                                     className="w-10 h-10"
                                 />
                                <Link href={route("posts.edit", quickpost.id)}>
                                     <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                </Link>
                            </div>
@@ -96,7 +96,7 @@ export default function Dashboard(props) {
                     </div>
                     
                     <div className="mt-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                       <h2 className="p-4 text-lg font-bold border-b border-gray-200">ともだちのきぶん</h2>
+                       <h2 className="p-4 text-lg font-bold">ともだちのきぶん</h2>
                     </div>
                     
                 </div>
