@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\ChartApiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
