@@ -8,7 +8,7 @@ import { Transition } from '@headlessui/react';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
     const user = usePage().props.auth.user;
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState("");
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
@@ -22,12 +22,16 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     };
     
     const handleImage = (e) => {
-        setImage(e.target.files[e.target.files.length - 1]);
+        setImage(e.target.files[e.target.files.length]);
     }
     
-    const getImagePath = (image) => {
-        const file = image;
-        return file.prototype.webkitRelativePath;
+    const getImagePath = (image, e) => {
+        const reader = new FileReader();
+        const blobs = new blob(e.target.files);
+        const blob = reader.readAsArrayBuffer(blobs);
+        const result = reader.readAsDataURL(blob[e.target.files.length]);
+        console.log(result);
+        return result;
     } 
 
     return (
