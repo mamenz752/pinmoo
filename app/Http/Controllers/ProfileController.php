@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Cloudinary;
+// use Cloudinary\Api\Upload\UploadApi;
+// use Cloudinary\Uploader;
 
 class ProfileController extends Controller
 {
@@ -29,11 +32,35 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // if (!empty($request->file('image_path'))) {
+        //     $image_url = Cloudinary::upload($request->file('image_path')->getRealPath())->getSecurePath();
+        //         $image = $request->file('image_path');
+        //         $upload_api = new UploadApi();
+        //         $image_url = $upload_api->upload($request['image_path']);
+        //         $image_url = Cloudinary\Uploader::upload($image->getPathname())['secure_url'];
+        //     dd($image_url);
+        //     $request->user()->image_path = $image_url;
+        // }
+        
+        if ($request->has('image_path')) {
+            $image = $request->files->get('file');
+            // $file_path = $image->getRealPath();
+            // $cloudinary = new Cloudinary();
+            // $image_url = $cloudinary->uploadApi()->upload($file_path)->getSecurePath();
+            $image_url = Cloudinary::upload($image->getRealPath())->getSecurePath();
+            // $image = $request->file('image_path');
+            // $upload_api = new UploadApi();
+            // $image_url = $upload_api->upload($request['image_path']);
+            // $image_url = Cloudinary\Uploader::upload($image->getPathname())['secure_url'];
+            dd($image_url);
+            $request->user()->image_path = $image_url;
+        }
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
+
+        $request->user()->fill($request->validated());
 
         $request->user()->save();
 

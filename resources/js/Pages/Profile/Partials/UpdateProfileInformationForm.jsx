@@ -11,6 +11,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
+        image_path: user.image_path,
     });
 
     const submit = (e) => {
@@ -29,7 +30,22 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="mt-6 space-y-6" enctype="multipart/form-data">
+                <div>
+                    <InputLabel htmlFor="image_path" value="Image" />
+                    
+                    <input
+                        type="file"
+                        id="image_path"
+                        className="mt-1 block w-full"
+                        name="image_path"
+                        value={data.image_path}
+                        onChange={(e) => setData('image_path', e.target.value)}
+                        />
+                    
+                    <InputError className="mt-2" message={errors.image_path} />
+                </div>
+                
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
@@ -56,7 +72,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
-                        autoComplete="username"
+                        autoComplete="email"
                     />
 
                     <InputError className="mt-2" message={errors.email} />
