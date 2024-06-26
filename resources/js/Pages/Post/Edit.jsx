@@ -54,7 +54,7 @@ export default function Edit(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="shadow-sm sm:rounded-lg">
+                    <div className="sm:rounded-lg">
                         <Link href={route("dashboard")}>
                             <div className="p-2 flex items-center justify-center gap-2 border border-gray text-gray-900 bg-white rounded-full">
                                 <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@ export default function Edit(props) {
                                 ひとこと
                             </h1>
                             <textarea
-                                className="w-1/2 flex items-center justify-center rounded-sm"
+                                className="w-1/2 flex items-center justify-center rounded-lg"
                                 name="comment"
                                 value={data.comment}
                                 onChange={(e) => setData("comment", e.target.value)}
