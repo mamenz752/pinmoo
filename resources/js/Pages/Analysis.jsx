@@ -15,9 +15,11 @@ export default function Analysis(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         
-                        <h1>ここ3日間の自分の気分</h1>
+                        <h1 className="p-4 font-bold border-b border-gray-200">ここ3日間の自分の気分</h1>
                         
-                        <MoodRaderChart />
+                        <div className="w-2/3 h-2/3 mx-auto p-8">
+                            <MoodRaderChart />
+                        </div>
                 
                     </div>
                 </div>

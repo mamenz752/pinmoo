@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -19,8 +20,17 @@ ChartJS.register(
   Legend
 );
 
+// const [chartData, setChartData] = useState(null);  // データ用の状態を初期化
+
+// useEffect(() => {
+//   axios.get('/api/chart-data')
+//     // .then(response => response.json())
+//     .then(data => setChartData(data))  // 取得したデータを状態に保存
+//     .catch(error => console.error('Error fetching data:', error));  // エラーハンドリング
+// }, []);
+
 export const data = {
-  labels: ['Thing 1', 'Thing 2', 'Thing 3', 'Thing 4', 'Thing 5', 'Thing 6'],
+  labels: ['Thing 1', 'Thing 2', 'Thing 3', 'Thing 4', 'Thing 5', 'Thing 6', 'Thing 7'],
   datasets: [
     {
       label: '# of Votes',
@@ -32,6 +42,10 @@ export const data = {
   ],
 };
 
+
 export default function MoodRaderChart() {
+  if (data == null) {
+      return <div>Loading...</div>;
+    }
   return <Radar data={data} />;
 }

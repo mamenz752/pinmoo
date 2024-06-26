@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ChartApiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,6 +47,10 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Analysis');
     })->name('analysis');
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/api/chart-data', [ChartApiController::class, 'rader']);
+// });
 
 
 Route::middleware('auth')->group(function () {
