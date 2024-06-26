@@ -45,7 +45,7 @@ export default function Dashboard(props) {
                             <fieldset
                                 name="mood_id"
                                 onChange={(e) => setData("mood_id", e.target.value)}
-                                className="mx-auto py-6 w-[60%] grid items-center justify-center grid-cols-5 gap-2"
+                                className="mx-auto py-6 w-[40%] grid items-center justify-center grid-cols-5 gap-2"
                             >
                                     { moods.map((mood) => (
                                         <div
@@ -69,7 +69,7 @@ export default function Dashboard(props) {
                             </fieldset>
                             <button
                                 type="submit"
-                                className="w-1/2 p-2 flex justify-center rounded-sm bg-pi-blue text-white"
+                                className="w-1/3 p-2 flex justify-center rounded-md shadow-md bg-pi-blue text-white"
                             >
                                 記録する
                             </button>
@@ -78,8 +78,8 @@ export default function Dashboard(props) {
                     {/* ここまでクイックステータス */}
                     
                     <div className="mt-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                       <h2 className="p-4 text-lg font-bold">じぶんのきぶん</h2>
-                       <div className="p-4 flex items-center justify-between gap-4">
+                       <h2 className="p-4 text-lg font-bold border-b border-gray-200">じぶんのきぶん</h2>
+                       <div className="p-4 flex items-center justify-between gap-6">
                            <p>{quickpost.comment}</p>
                            <div className="flex items-center gap-2">
                                <img 
@@ -96,7 +96,7 @@ export default function Dashboard(props) {
                     </div>
                     
                     <div className="mt-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                       <h2 className="p-4 text-lg font-bold">ともだちのきぶん</h2>
+                       <h2 className="p-4 text-lg font-bold border-b border-gray-200">ともだちのきぶん</h2>
                     </div>
                     
                 </div>
