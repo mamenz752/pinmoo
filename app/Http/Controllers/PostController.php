@@ -33,7 +33,7 @@ class PostController extends Controller
     {
         $input = $request->all();
         $post->fill($input)->save();
-        $post->statuses()->attach($request->status);
+        $post->statuses()->attach($request->status_id);
         return redirect("/dashboard");
     }
     
