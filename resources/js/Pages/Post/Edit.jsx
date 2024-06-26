@@ -109,6 +109,7 @@ export default function Edit(props) {
                                 className="w-1/2 flex items-center justify-center rounded-lg"
                                 name="comment"
                                 value={data.comment}
+                                placeholder="何か伝えたいことはありますか？"
                                 onChange={(e) => setData("comment", e.target.value)}
                             >
                             </textarea>
