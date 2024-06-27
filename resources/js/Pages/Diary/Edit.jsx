@@ -16,6 +16,14 @@ export default function Diary(props) {
         e.preventDefault();
         put(route("diary.update", diary.id));
     }
+    
+    const handleCurrentStar = (data) => {
+        if (data) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     return (
         <AuthenticatedLayout
@@ -40,10 +48,20 @@ export default function Diary(props) {
                     
                     <div className="mt-4 px-4 py-2 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <h2 className="p-4 text-lg font-bold border-b border-gray-200">じぶん日誌を編集する</h2>
+                        
+                        <button
+                                onClick={() => {setData("is_stared", handleCurrentStar(data.is_stared))}}
+                                className={`mt-4 p-4 w-full text-white rounded-md shadow-md ${data.is_stared ? "bg-pi-black" : "bg-pi-orange"}`}
+                            >
+                                { data.is_stared ? 
+                                    "お気に入りから削除する" :
+                                    "お気に入りに追加する"
+                                }
+                        </button>
                     
                         <form
                             onSubmit={handleSendPosts}
-                            className="w-full mx-auto"
+                            className="mt-4 w-full mx-auto"
                         >
                             <div className="mt-4 mx-auto w-2/3 flex flex-col gap-2">
                                 <label
