@@ -9,7 +9,7 @@ export default function Dashboard(props) {
     
     const {data, setData, post} = useForm({
         user_id: props.auth.user.id,
-        mood_id: "",
+        mood_id: "1",
         comment: ""
     })
     
@@ -17,7 +17,7 @@ export default function Dashboard(props) {
         setCurrentMood(data.mood_id);
         post("/posts");
     }
-    console.log(data);
+    // console.log(data);
     
     return (
         <AuthenticatedLayout
