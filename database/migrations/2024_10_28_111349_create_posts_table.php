@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('mood_id')->constrained();
+            $table->string('comment')->nullable();
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('post_status', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('post_id')->constrained();
+            $table->foreignId('status_id')->constrained();
+            $table->softDeletes('deleted_at');
         });
     }
 

@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('body');
+            $table->boolean('is_star');
+            $table->foreignId('post_id')->constrained()->nullable();
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 
