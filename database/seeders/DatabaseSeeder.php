@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusesTableSeeder::class);
 
         User::factory()->create([
+            'username' => 'testuser',
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => 'password',
         ]);
     }
 }
