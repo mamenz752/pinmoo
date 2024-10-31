@@ -26,9 +26,9 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <h2 className="flex items-center text-xl font-semibold leading-tight text-gray-800 sm:-my-px sm:ms-10 sm:flex">
                                 { header }
-                            </div>
+                            </h2>
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
