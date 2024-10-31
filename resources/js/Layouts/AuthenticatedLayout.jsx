@@ -2,6 +2,11 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import DashboardIcon from '../../../public/icons/DashboardIcon';
+import DiaryIcon from '../../../public/icons/DiaryIcon';
+import SmileIcon from '../../../public/icons/SmileIcon';
+import ChartIcon from '../../../public/icons/ChartIcon';
+import ProfileIcon from '../../../public/icons/ProfileIcon';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -171,6 +176,40 @@ export default function AuthenticatedLayout({ header, children }) {
             )}
 
             <main>{children}</main>
+
+            <div className='w-full fixed bottom-0 py-4 bg-white'>
+                <ul className='flex items-center justify-center gap-16'>
+                    <li className='hover:opacity-60'>
+                        <Link href={route('dashboard')} className='flex flex-col items-center justify-center gap-1'>
+                            <DashboardIcon />
+                            <span className='text-sm'>ホーム</span>
+                        </Link>
+                    </li>
+                    <li className='hover:opacity-60'>
+                        <Link href={route('diary.index')} className='flex flex-col items-center justify-center gap-1'>
+                            <DiaryIcon />
+                            <span className='text-sm'>じぶん日記</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='' >
+                            <SmileIcon />
+                        </Link>
+                    </li>
+                    <li className='hover:opacity-60'>
+                        <Link href={route('analysis')} className='flex flex-col items-center justify-center gap-1'>
+                            <ChartIcon />
+                            <span className='text-sm'>感情グラフ</span>
+                        </Link>
+                    </li>
+                    <li className='hover:opacity-60'>
+                        <Link href={route('profile.edit')} className='flex flex-col items-center justify-center gap-1'>
+                            <ProfileIcon />
+                            <span className='text-sm'>プロフィール</span>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 }
