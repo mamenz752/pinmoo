@@ -1,5 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import Logo from '../../../public/Logo';
+import SmileShareIcon from '../../../public/icons/SmileShareIcon';
+import CalendarHeartIcon from '../../../public/icons/CalendarHeartIcon';
+import HeartHandIcon from '../../../public/icons/HeartHandIcon';
 import Footer from '@/Components/Footer';
 
 export default function Welcome({ auth }) {
@@ -38,20 +41,23 @@ export default function Welcome({ auth }) {
                     </nav>
                 </header>
 
-                <main>
-                    <ul>
-                        <li>
+                <main className='flex flex-col items-center'>
+                    <ul className='flex flex-col gap-8'>
+                        <li className='grid grid-cols-2 items-center justify-center'>
+                            <SmileShareIcon />
                             <p>pinmooで自分の気分をシェアしてみよう</p>
                         </li>
-                        <li>
+                        <li className='grid grid-cols-2 items-center'>
+                            <CalendarHeartIcon />
                             <p>感情日記も思いのままに</p>
                         </li>
-                        <li>
+                        <li className='grid grid-cols-2 items-center'>
+                            <HeartHandIcon />
                             <p>メンタルヘルスの健康維持にも</p>
                         </li>
                     </ul>
 
-                    <button>
+                    <button className='mt-8 py-4 px-8 bg-pi-orange text-white font-bold rounded-md'>
                         <Link href={route('login')}>
                             今すぐ始めよう
                         </Link>
