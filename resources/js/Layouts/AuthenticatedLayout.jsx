@@ -1,7 +1,3 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import Logo from '../../../public/Logo';
 import DashboardIcon from '../../../public/icons/DashboardIcon';
 import DiaryIcon from '../../../public/icons/DiaryIcon';
@@ -10,9 +6,15 @@ import ChartIcon from '../../../public/icons/ChartIcon';
 import ProfileIcon from '../../../public/icons/ProfileIcon';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import QuickStatusModal from '@/Pages/Status/QuickStatusModal';
 
 export default function AuthenticatedLayout({ header, children }) {
+    const [showQuickStatusModal, setShowQuickStatusModal] = useState(false);
     const user = usePage().props.auth.user;
+
+    const handleShowQuickStatusModal = () => {
+        setShowQuickStatusModal(!showQuickStatusModal);
+    };
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -47,9 +49,15 @@ export default function AuthenticatedLayout({ header, children }) {
                 </div>
             </nav>
 
-            <main>{children}</main>
+            <main>
+                {children}
+                <QuickStatusModal
+                    showQuickStatusModal={showQuickStatusModal}
+                    onShowQuickStatusModalFn={handleShowQuickStatusModal}
+                />
+            </main>
 
-            <div className='w-full fixed bottom-0 py-4 bg-white'>
+            <div className='z-[40] w-full fixed bottom-0 py-4 bg-white'>
                 <ul className='flex items-center justify-center gap-16'>
                     <li className='hover:opacity-60'>
                         <Link href={route('dashboard')} className='flex flex-col items-center justify-center gap-1'>
@@ -64,9 +72,11 @@ export default function AuthenticatedLayout({ header, children }) {
                         </Link>
                     </li>
                     <li className='text-pi-orange hover:opacity-60'>
-                        <Link href='' >
+                        <button
+                            onClick={handleShowQuickStatusModal}
+                        >
                             <SmileIcon />
-                        </Link>
+                        </button>
                     </li>
                     <li className='hover:opacity-60'>
                         <Link href={route('analysis')} className='flex flex-col items-center justify-center gap-1'>
