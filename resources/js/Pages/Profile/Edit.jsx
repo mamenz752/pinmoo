@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
@@ -7,16 +7,18 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 export default function Edit({ mustVerifyEmail, status }) {
     return (
         <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Profile
-                </h2>
-            }
+        header={ "Profile" }
         >
             <Head title="Profile" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
+                    <button className='w-full my-2 py-4 px-8 bg-pi-red text-white'>
+                        <Link method='post' href={route('logout')}>
+                            <p>ログアウト</p>
+                        </Link>
+                    </button>
+
                     <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}

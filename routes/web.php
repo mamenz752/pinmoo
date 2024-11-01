@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DiaryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,9 +15,22 @@ Route::get('/', function () {
     ]);
 });
 
+// TODO: Routing template...
+// Route::middleware('auth')->group(function () {
+
+// });
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/diaries', [DiaryController::class, 'index'])->name('diary.index');
+});
+
+Route::get('/analysis', function () {
+    return Inertia::render('Analysis/AnalysisPresenter');
+})->middleware('auth')->name('analysis');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
