@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
+    Route::get('/posts/new', [PostController::class, 'new'])->name('posts.new');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 });
 
 Route::middleware('auth')->group(function() {

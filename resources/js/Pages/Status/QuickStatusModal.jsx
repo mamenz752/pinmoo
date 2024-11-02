@@ -1,40 +1,34 @@
 import { AdvancedImage } from '@cloudinary/react';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Cloudinary } from '@cloudinary/url-gen';
+import { useForm } from '@inertiajs/react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 const QuickStatusModal = (props) => {
-    const { showQuickStatusModal, onShowQuickStatusModalFn } = props;
-    const [moods, setMoods] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    
+    const { user, moods } = props;
+
+    const {data, setData, post} = useForm({
+        user_id: user.id,
+        mood_id: 1,
+        comment: ''
+    });
+    const submitCurrentMood = (e) => {
+        e.preventDefault();
+        console.log(data);
+        post(route('posts.store'), data);
+    }
+
+    // Cloudinary Config
     const cld = new Cloudinary({
         cloud: {
           cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
         },
       });
 
-    useEffect(() => {
-        const getAllMoods = () => {
-            axios.get(`${import.meta.env.VITE_API_URL}/api/v1/get-all-moods/`)
-            .then((res) => {
-                setMoods(res.data.moods);
-            })
-            .then(() =>
-                setIsLoading(false)
-            )
-            .catch((error) => {
-                console.log(error);
-            })
-        };
-        getAllMoods();
-    }, []);
-
   return (
-    showQuickStatusModal ?
+    <AuthenticatedLayout>
         <div
             className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 z-[20]"
-            onClick={onShowQuickStatusModalFn}
         >
             <div
                 className="z-[30] max-h-full"
@@ -48,38 +42,42 @@ const QuickStatusModal = (props) => {
                         <p>今の気分をシェアしましょう</p>
                     </div>
                     <form
-                        onSubmit={(e) => e.preventDefault()}
+                        onSubmit={submitCurrentMood}
                     >
-                        <div className='my-4 grid grid-cols-5 gap-2'>
-                            { isLoading ?
-                                <></>
-                                :
+                        <fieldset
+                            name='mood_id'
+                            onChange={(e) => setData('mood_id', e.target.value)}
+                            className='my-4 grid grid-cols-5 gap-2'
+                        >
+                            {
+                            // isLoading ?
+                            //     <></>
+                            //     :
                                 moods.map((mood, i) => {
-                                    const myImg = cld.image(mood.image_path);
+                                    const moodImage = cld.image(mood.image_path);
                                     return (
                                     <div className='flex flex-col items-center justify-center'>
                                         <input
                                             id={mood.feeling}
                                             type='radio'
-                                            name='mood'
-                                            value={mood.feeling}
+                                            name='mood_id'
+                                            value={mood.id}
                                         />
                                         <label
                                             key={i}
                                             for={mood.feeling}
                                         >
                                             <div className='w-20 h-full'>
-                                                <AdvancedImage cldImg={myImg} />
+                                                <AdvancedImage cldImg={moodImage} />
                                             </div>
                                         </label>
                                     </div>
                                     )
                                 })
                             }
-                        </div>
+                        </fieldset>
                         <button
                             type='submit'
-                            onClick={onShowQuickStatusModalFn}
                             className='bg-pi-orange text-white px-4 py-2 rounded-md'>
                                 記録する
                         </button>
@@ -87,8 +85,7 @@ const QuickStatusModal = (props) => {
                 </div>
             </div>
         </div>
-    :
-        <></>
+    </AuthenticatedLayout>
   )
 }
 

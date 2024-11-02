@@ -5,19 +5,9 @@ import SmileIcon from '../../../public/icons/SmileIcon';
 import ChartIcon from '../../../public/icons/ChartIcon';
 import ProfileIcon from '../../../public/icons/ProfileIcon';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
-// import axios from 'axios';
-import QuickStatusModal from '@/Pages/Status/QuickStatusModal';
 
 export default function AuthenticatedLayout({ header, children }) {
-    // const [isLoading, setIsLoading] = useState(true);
-    const [showQuickStatusModal, setShowQuickStatusModal] = useState(false);
-    // const [moods, setMoods] = useState([]);
     const user = usePage().props.auth.user;
-    
-    const handleShowQuickStatusModal = () => {
-        setShowQuickStatusModal(!showQuickStatusModal);
-    }
     
     return (
         <div className="min-h-screen bg-gray-100">
@@ -54,10 +44,6 @@ export default function AuthenticatedLayout({ header, children }) {
 
             <main>
                 {children}
-                <QuickStatusModal
-                    showQuickStatusModal={showQuickStatusModal}
-                    onShowQuickStatusModalFn={handleShowQuickStatusModal}
-                />
             </main>
 
             <div className='z-[40] w-full fixed bottom-0 py-4 bg-white'>
@@ -75,11 +61,9 @@ export default function AuthenticatedLayout({ header, children }) {
                         </Link>
                     </li>
                     <li className='text-pi-orange hover:opacity-60'>
-                        <button
-                            onClick={handleShowQuickStatusModal}
-                        >
+                        <Link href={route('posts.new')}>
                             <SmileIcon />
-                        </button>
+                        </Link>
                     </li>
                     <li className='hover:opacity-60'>
                         <Link href={route('analysis')} className='flex flex-col items-center justify-center gap-1'>
