@@ -25,6 +25,8 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
     Route::get('/posts/new', [PostController::class, 'new'])->name('posts.new');
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::patch('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 });
 

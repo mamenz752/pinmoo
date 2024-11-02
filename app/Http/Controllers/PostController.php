@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Mood;
 use App\Models\Post;
+use App\Models\Status;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -37,5 +38,20 @@ class PostController extends Controller
         $input = $request->all();
         $post->fill($input)->save();
         return redirect(route('dashboard'));
+    }
+
+    public function edit(Request $request, User $user, Mood $mood, Post $post, Status $status)
+    {
+        return Inertia::render('Status/Edit', [
+            'user' => $user->find(auth()->id()),
+            'moods' => $mood->get(),
+            'post' => $post->find($request->id),
+            "statuses" => $status->get()
+        ]);
+    }
+
+    public function update()
+    {
+
     }
 }

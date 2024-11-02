@@ -50,9 +50,6 @@ const QuickStatusModal = (props) => {
                             className='my-4 grid grid-cols-5 gap-2'
                         >
                             {
-                            // isLoading ?
-                            //     <></>
-                            //     :
                                 moods.map((mood, i) => {
                                     const moodImage = cld.image(mood.image_path);
                                     return (

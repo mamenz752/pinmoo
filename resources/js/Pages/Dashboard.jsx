@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import EditIcon from '../../../public/icons/EditIcon';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedImage } from '@cloudinary/react';
@@ -15,6 +15,7 @@ export default function Dashboard({user, moods, newPost}) {
 
     if (newPost) {
         console.log(newPost);
+        console.log(newPost.id);
     }
 
 
@@ -32,9 +33,9 @@ export default function Dashboard({user, moods, newPost}) {
                         <div className='w-12 h-12'>
                             <AdvancedImage cldImg={currentMoodImage} />
                         </div>
-                        <button>
+                        <Link href={route('posts.edit', newPost.id)}>
                             <EditIcon />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
