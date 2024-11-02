@@ -13,12 +13,6 @@ export default function Dashboard({user, moods, newPost}) {
       });
     const currentMoodImage = cld.image(currentMood.image_path);
 
-    if (newPost) {
-        console.log(newPost);
-        console.log(newPost.id);
-    }
-
-
     return (
         <AuthenticatedLayout
             header={"Dashboard"}
@@ -30,6 +24,7 @@ export default function Dashboard({user, moods, newPost}) {
                 <div className="mt-4 p-4 flex justify-between items-center bg-white shadow-sm sm:rounded-lg">
                     <p>{user.username}</p>
                     <div className='flex gap-4'>
+                        <p>{newPost.comment ? newPost.comment :<></>}</p>
                         <div className='w-12 h-12'>
                             <AdvancedImage cldImg={currentMoodImage} />
                         </div>

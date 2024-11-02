@@ -14,7 +14,6 @@ const QuickStatusModal = (props) => {
     });
     const submitCurrentMood = (e) => {
         e.preventDefault();
-        console.log(data);
         post(route('posts.store'), data);
     }
 

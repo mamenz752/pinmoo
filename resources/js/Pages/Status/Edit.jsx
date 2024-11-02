@@ -21,6 +21,7 @@ const QuickStatusEdit = ({ user, moods, post, statuses }) => {
 
   const submitPutPost = (e) => {
     e.preventDefault();
+    console.log(data);
     put(route('posts.update', post.id));
   }
 

@@ -50,8 +50,16 @@ class PostController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'mood_id' => 'required',
+            'user_id' => 'required'
+        ]);
 
+        $input = $request->all();
+        $post->fill($input)->save();
+        $post->statuses()->attach($request->status_id);
+        return redirect(route('dashboard'));
     }
 }
