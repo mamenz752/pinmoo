@@ -15,52 +15,52 @@ class MoodsTableSeeder extends Seeder
     {
         DB::table('moods')->insert([
             'feeling' => 'angry',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/angry.png',
+            'image_path' => 'pinmoo/moods/angry',
             'category' => 'NEGATIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'sad',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/sad.png',
+            'image_path' => 'pinmoo/moods/sad',
             'category' => 'NEGATIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'scared',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/scared.png',
+            'image_path' => 'pinmoo/moods/scared',
             'category' => 'NEGATIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'nervous',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/nervous.png',
+            'image_path' => 'pinmoo/moods/nervous',
             'category' => 'NEGATIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'smile',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/smile.png',
+            'image_path' => 'pinmoo/moods/smile',
             'category' => 'NORMAL'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'surprised',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/surprised.png',
+            'image_path' => 'pinmoo/moods/surprised',
             'category' => 'NORMAL'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'wink',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/wink.png',
+            'image_path' => 'pinmoo/moods/wink',
             'category' => 'POSITIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'joyful',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/joyful.png',
+            'image_path' => 'pinmoo/moods/joyful',
             'category' => 'POSITIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'stared',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/stared.png',
+            'image_path' => 'pinmoo/moods/stared',
             'category' => 'POSITIVE'
         ]);
         DB::table('moods')->insert([
             'feeling' => 'love',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715698852/pinmoo/moods/love.png',
+            'image_path' => 'pinmoo/moods/love',
             'category' => 'POSITIVE'
         ]);
     }
