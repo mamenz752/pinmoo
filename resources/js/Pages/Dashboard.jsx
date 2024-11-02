@@ -1,10 +1,22 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import EditIcon from '../../../public/icons/EditIcon';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { AdvancedImage } from '@cloudinary/react';
 
-export default function Dashboard({moods, newPost}) {
+export default function Dashboard({user, moods, newPost}) {
+    const currentMood = moods.filter(mood => mood.id === newPost.mood_id)[0];
+    const cld = new Cloudinary({
+        cloud: {
+          cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+        },
+      });
+    const currentMoodImage = cld.image(currentMood.image_path);
+
     if (newPost) {
         console.log(newPost);
     }
+
 
     return (
         <AuthenticatedLayout
@@ -13,8 +25,17 @@ export default function Dashboard({moods, newPost}) {
             <Head title="Dashboard" />
 
             <div className="my-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    a
+                <h1 className='text-lg tracking-wider'>じぶんの気分</h1>
+                <div className="mt-4 p-4 flex justify-between items-center bg-white shadow-sm sm:rounded-lg">
+                    <p>{user.username}</p>
+                    <div className='flex gap-4'>
+                        <div className='w-12 h-12'>
+                            <AdvancedImage cldImg={currentMoodImage} />
+                        </div>
+                        <button>
+                            <EditIcon />
+                        </button>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>

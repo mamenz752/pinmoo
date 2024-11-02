@@ -10,9 +10,10 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index(Mood $mood, Post $post)
+    public function index(User $user, Mood $mood, Post $post)
     {
         return Inertia::render('Dashboard', [
+            "user" => $user->find(auth()->id()),
             "moods" => $mood->get(),
             "newPost" => $post->orderby('created_at', 'desc')->first()
         ]);
