@@ -18,7 +18,6 @@ const QuickStatusModal = (props) => {
         const getAllMoods = () => {
             axios.get(`${import.meta.env.VITE_API_URL}/api/v1/get-all-moods/`)
             .then((res) => {
-                console.log(res.data.moods);
                 setMoods(res.data.moods);
             })
             .then(() =>
