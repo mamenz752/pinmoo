@@ -6,16 +6,19 @@ import ChartIcon from '../../../public/icons/ChartIcon';
 import ProfileIcon from '../../../public/icons/ProfileIcon';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+// import axios from 'axios';
 import QuickStatusModal from '@/Pages/Status/QuickStatusModal';
 
 export default function AuthenticatedLayout({ header, children }) {
+    // const [isLoading, setIsLoading] = useState(true);
     const [showQuickStatusModal, setShowQuickStatusModal] = useState(false);
+    // const [moods, setMoods] = useState([]);
     const user = usePage().props.auth.user;
-
+    
     const handleShowQuickStatusModal = () => {
         setShowQuickStatusModal(!showQuickStatusModal);
-    };
-
+    }
+    
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="border-b border-gray-100 bg-white">

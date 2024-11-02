@@ -1,7 +1,28 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 
 const QuickStatusModal = (props) => {
     const { showQuickStatusModal, onShowQuickStatusModalFn } = props;
+    const [moods, setMoods] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const getAllMoods = () => {
+            axios.get(`http://localhost:80/api/v1/get-all-moods/`)
+            .then((res) => {
+                console.log(res.data.moods);
+                setMoods(res.data.moods);
+            })
+            .then(() =>
+                setIsLoading(false)
+            )
+            .catch((error) => {
+                console.log(error);
+            })
+        };
+        getAllMoods();
+    }, []);
+
   return (
     showQuickStatusModal ?
         <div
@@ -19,6 +40,27 @@ const QuickStatusModal = (props) => {
                     <form
                         onSubmit={(e) => e.preventDefault()}
                     >
+                        { isLoading ?
+                            <></>
+                            :
+                            // <></>
+                            moods.map((mood, i) => {
+                                <>
+                                    <input
+                                        id={mood.feeling}
+                                        type='radio'
+                                        name='mood'
+                                        value={mood.feeling}
+                                    />
+                                    <label
+                                        key={i}
+                                        for={mood.feeling}
+                                    >
+                                        <img src={mood.image_path} />
+                                    </label>
+                                </>
+                            })
+                        }
                         <button
                             type='submit'
                             onClick={onShowQuickStatusModalFn}
