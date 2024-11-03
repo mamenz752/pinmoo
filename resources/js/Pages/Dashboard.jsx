@@ -5,7 +5,7 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedImage } from '@cloudinary/react';
 import { useEffect, useState } from 'react';
 
-export function getMoodUrl(imagePath) {
+function getMoodUrl(imagePath) {
     const cld = new Cloudinary({
         cloud: {
             cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
