@@ -20,6 +20,7 @@ export default function Dashboard({user, moods, newPost}) {
     useEffect(() => {
         if (newPost) {
             setCurrentMood(moods.filter(mood => mood.id === newPost.mood_id)[0]);
+            console.log(newPost);
         }
     }, [])
 

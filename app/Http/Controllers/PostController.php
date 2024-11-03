@@ -57,9 +57,10 @@ class PostController extends Controller
             'user_id' => 'required'
         ]);
 
+        $post = $post->find($request->id);
         $input = $request->all();
-        $post->fill($input)->save();
         $post->statuses()->attach($request->status_id);
+        $post->update($input);
         return redirect(route('dashboard'));
     }
 }
