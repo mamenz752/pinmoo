@@ -2,7 +2,6 @@ import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head } from '@inertiajs/react'
 import { useForm } from '@inertiajs/react'
-import { AdvancedImage } from '@cloudinary/react'
 
 const QuickStatusEdit = ({ user, moods, post, statuses }) => {
   const {data, setData, put} = useForm({
@@ -76,7 +75,6 @@ const QuickStatusEdit = ({ user, moods, post, statuses }) => {
               >
                   {
                       statuses.map((status, i) => {
-                          const statusImage = cld.image(status.image_path);
                           return (
                           <div className='flex flex-col items-center justify-center'>
                               <input
@@ -90,7 +88,7 @@ const QuickStatusEdit = ({ user, moods, post, statuses }) => {
                                   for={status.feeling}
                               >
                                   <div className='w-20 h-full'>
-                                      <AdvancedImage cldImg={statusImage} />
+                                      <img src={status.image_path} alt={status.status} />
                                   </div>
                               </label>
                           </div>
