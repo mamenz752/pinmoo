@@ -19,7 +19,7 @@
 #### 使用言語
 
 -   HTML / CSS
--   TypeScript
+-   JavaScript
 -   PHP
 
 #### ライブラリ・フレームワーク
