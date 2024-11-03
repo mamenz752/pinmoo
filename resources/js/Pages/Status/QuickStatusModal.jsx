@@ -1,19 +1,9 @@
 import { AdvancedImage } from '@cloudinary/react';
-import React from 'react'
-import { getMoodUrl } from '../Dashboard';
-// import { Cloudinary } from '@cloudinary/url-gen';
+import React, { useEffect } from 'react'
+import { Cloudinary } from '@cloudinary/url-gen';
 import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-
-// export function getMoodUrl(imagePath) {
-//     const cld = new Cloudinary({
-//         cloud: {
-//             cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-//         },
-//     });
-//     const MoodImageUrl = cld.image(imagePath);
-//     return MoodImageUrl;
-// }
+import { useState } from 'react';
 
 const QuickStatusModal = ({user, moods}) => {
     const {data, setData, post} = useForm({
@@ -24,6 +14,18 @@ const QuickStatusModal = ({user, moods}) => {
     const submitCurrentMood = (e) => {
         e.preventDefault();
         post(route('posts.store'), data);
+    }
+
+    function getMoodUrl(imagePath) {
+        const cld = new Cloudinary({
+            cloud: {
+                cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+                apiKey: import.meta.env.VITE_CLOUDINARY_API_KEY,
+                apiSecret: import.meta.env.VITE_CLOUDINARY_API_SECRET
+            },
+        });
+        const MoodImageUrl = cld.image(imagePath);
+        return MoodImageUrl;
     }
 
   return (
@@ -52,22 +54,25 @@ const QuickStatusModal = ({user, moods}) => {
                         >
                             {
                                 moods.map((mood, i) => {
-                                    <div className='flex flex-col items-center justify-center'>
-                                        <input
-                                            id={mood.feeling}
-                                            type='radio'
-                                            name='mood_id'
-                                            value={mood.id}
-                                        />
-                                        <label
-                                            key={i}
-                                            for={mood.feeling}
-                                        >
-                                            <div className='w-20 h-full'>
-                                                <AdvancedImage cldImg={getMoodUrl(mood.image_path)} />
-                                            </div>
-                                        </label>
-                                    </div>
+                                    const moodImage = getMoodUrl(mood.image_path);
+                                    return (
+                                        <div className='flex flex-col items-center justify-center'>
+                                            <input
+                                                id={mood.feeling}
+                                                type='radio'
+                                                name='mood_id'
+                                                value={mood.id}
+                                            />
+                                            <label
+                                                key={i}
+                                                for={mood.feeling}
+                                            >
+                                                <div className='w-20 h-full'>
+                                                    <AdvancedImage cldImg={moodImage} />
+                                                </div>
+                                            </label>
+                                        </div>
+                                    )
                                 })
                             }
                         </fieldset>
