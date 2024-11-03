@@ -15,43 +15,43 @@ class StatusesTableSeeder extends Seeder
     {
         DB::table('statuses')->insert([
             'status' => 'friends',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/friends.png'
+            'image_path' => 'pinmoo/statuses/friends'
         ]);
         DB::table('statuses')->insert([
             'status' => 'family',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/family.png'
+            'image_path' => 'pinmoo/statuses/family'
         ]);
         DB::table('statuses')->insert([
             'status' => 'lover',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/lover.png'
+            'image_path' => 'pinmoo/statuses/lover'
         ]);
         DB::table('statuses')->insert([
             'status' => 'sunny',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/sunny.png'
+            'image_path' => 'pinmoo/statuses/sunny'
         ]);
         DB::table('statuses')->insert([
             'status' => 'cloudy',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/cloudy.png'
+            'image_path' => 'pinmoo/statuses/cloudy'
         ]);
         DB::table('statuses')->insert([
             'status' => 'rainy',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/rainy.png'
+            'image_path' => '/pinmoo/statuses/rainy'
         ]);
         DB::table('statuses')->insert([
             'status' => 'study',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/study.png'
+            'image_path' => 'pinmoo/statuses/study'
         ]);
         DB::table('statuses')->insert([
             'status' => 'exam',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/exam.png'
+            'image_path' => 'pinmoo/statuses/exam'
         ]);
         DB::table('statuses')->insert([
             'status' => 'project',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/project.png'
+            'image_path' => 'pinmoo/statuses/project'
         ]);
         DB::table('statuses')->insert([
             'status' => 'work',
-            'image_path' => 'https://res.cloudinary.com/drzq0yhkr/image/upload/v1715772974/pinmoo/statuses/work.png'
+            'image_path' => 'pinmoo/statuses/work'
         ]);
     }
 }
