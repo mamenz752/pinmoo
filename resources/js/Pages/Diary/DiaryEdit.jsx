@@ -3,17 +3,17 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
-const New = ({ posts }) => {
-    const {data, setData, post} = useForm({
-        'title': '',
-        'body': '',
-        'is_star': false,
-        'post_id': ''
+const DiaryEdit = ({posts, diary}) => {
+    const {data, setData, put} = useForm({
+        'title': diary.title,
+        'body': diary.body,
+        'is_star': diary.is_star,
+        'post_id': diary.post_id
     });
 
-    const submitDiaryForm = (e) => {
+    const changeDiaryForm = (e) => {
         e.preventDefault();
-        post(route('diary.store'));
+        put(route('diary.update', diary.id));
     }
 
   return (
@@ -30,9 +30,14 @@ const New = ({ posts }) => {
 
             <div className="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <form
-                    onSubmit={(e) => submitDiaryForm(e)}
+                    onSubmit={(e) => changeDiaryForm(e)}
                 >
-                    <input type='text' name='title' onChange={(e) => setData('title', e.target.value)} />
+                    <input
+                        type='text'
+                        name='title'
+                        defaultValue={data.title}
+                        onChange={(e) => setData('title', e.target.value)}
+                    />
                     <textarea name='body' onChange={(e) => setData('body', e.target.value)}></textarea>
 
                     <div>
@@ -83,4 +88,4 @@ const New = ({ posts }) => {
   )
 }
 
-export default New
+export default DiaryEdit

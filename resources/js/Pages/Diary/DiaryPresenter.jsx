@@ -16,10 +16,25 @@ const DiaryPresenter = ({ diaries }) => {
 
             {
                 diaries ?
-                diaries.map((diary) => {
+                diaries.map((diary, i) => {
+                  console.log(diary)
                     return (
-                    <div className="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        {diary.title}
+                    <div
+                      className="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg"
+                      key={i}
+                    >
+                        <div className='flex justify-end'>
+                          <button>
+                            <Link href={route('diary.edit', diary.id)}>
+                              Edit
+                            </Link>
+                          </button>
+                        </div>
+                        <button>
+                          <Link href={route('diary.show', diary.id)}>
+                            {diary.title}
+                          </Link>
+                        </button>
                     </div>
                     )
                 }) : <></>

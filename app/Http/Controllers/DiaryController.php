@@ -34,4 +34,24 @@ class DiaryController extends Controller
         $diary->fill($input)->save();
         return redirect(route('diary.index'));
     }
+
+    public function edit(Request $request, Post $post, Diary $diary)
+    {
+        return Inertia::render('Diary/DiaryEdit', [
+            'posts' => $post->get(),
+            'diary' => $diary->where('id', $request->id)->first()
+        ]);
+    }
+
+    public function update(Request $request, Diary $diary)
+    {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $input = $request->all();
+        $diary->where('id', $request->id)->update($input);
+        return redirect(route('diary.index'));
+    }
 }
