@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Mood;
 use App\Models\Diary;
 use Inertia\Inertia;
 
@@ -16,10 +17,11 @@ class DiaryController extends Controller
         ]);
     }
 
-    public function new(Post $post)
+    public function new(Post $post, Mood $mood)
     {
         return Inertia::render('Diary/New', [
-            'posts' => $post->get()
+            'posts' => $post->get(),
+            'moods' => $mood->get()
         ]);
     }
 
@@ -35,11 +37,12 @@ class DiaryController extends Controller
         return redirect(route('diary.index'));
     }
 
-    public function edit(Request $request, Post $post, Diary $diary)
+    public function edit(Request $request, Post $post, Diary $diary, Mood $mood)
     {
         return Inertia::render('Diary/DiaryEdit', [
             'posts' => $post->get(),
-            'diary' => $diary->where('id', $request->id)->first()
+            'diary' => $diary->where('id', $request->id)->first(),
+            'moods' => $mood->get()
         ]);
     }
 

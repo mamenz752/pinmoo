@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
-const New = ({ posts }) => {
+const New = ({ posts, moods }) => {
     const {data, setData, post} = useForm({
         'title': '',
         'body': '',
@@ -46,8 +46,9 @@ const New = ({ posts }) => {
                             onChange={(e) => setData("post_id", e.target.value)}
                             // className="flex flex-col items-start gap-2"
                         >
-                                { posts.map((post) => (
-                                    <div
+                                { posts.map((post) => {
+                                    const mood = moods.filter((mood) => post.mood_id === mood.id)[0];
+                                    return (<div
                                         key={post.id}
                                         className="flex items-center gap-2"
                                     >
@@ -62,7 +63,10 @@ const New = ({ posts }) => {
                                             <label
                                                 htmlFor={post.id}
                                             >
-                                                <img src={post.mood_id.image_path} />
+                                                <img
+                                                    src={mood.image_path}
+                                                    alt={mood.feeling}
+                                                />
                                             </label>
                                         </div>
                                         <div className="w-full flex items-center justify-between gap-4">
@@ -70,8 +74,8 @@ const New = ({ posts }) => {
                                             <p>{post.comment}</p>
                                             <p>{post.created_at}</p>
                                         </div>
-                                    </div>
-                                )) }
+                                    </div>)
+                                }) }
                         </fieldset>
                     </div>
 

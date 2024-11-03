@@ -5,22 +5,11 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedImage } from '@cloudinary/react';
 import { useEffect, useState } from 'react';
 
-function getMoodUrl(imagePath) {
-    const cld = new Cloudinary({
-        cloud: {
-            cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-        },
-    });
-    const MoodImageUrl = cld.image(imagePath);
-    return MoodImageUrl;
-}
-
 export default function Dashboard({user, moods, newPost}) {
     const [currentMood, setCurrentMood] = useState();
     useEffect(() => {
         if (newPost) {
             setCurrentMood(moods.filter(mood => mood.id === newPost.mood_id)[0]);
-            console.log(newPost);
         }
     }, [])
 
@@ -39,7 +28,7 @@ export default function Dashboard({user, moods, newPost}) {
                         <div className='w-12 h-12'>
                             {
                                 newPost && currentMood ?
-                                    <AdvancedImage cldImg={getMoodUrl(currentMood.image_path)} />
+                                    <img src={currentMood.image_path} alt={currentMood.feeling} />
                                 : <></>
                             }
                         </div>

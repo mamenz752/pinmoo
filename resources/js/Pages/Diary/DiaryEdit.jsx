@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
-const DiaryEdit = ({posts, diary}) => {
+const DiaryEdit = ({posts, diary, moods}) => {
     const {data, setData, put} = useForm({
         'title': diary.title,
         'body': diary.body,
@@ -51,7 +51,9 @@ const DiaryEdit = ({posts, diary}) => {
                             onChange={(e) => setData("post_id", e.target.value)}
                             // className="flex flex-col items-start gap-2"
                         >
-                                { posts.map((post) => (
+                                { posts.map((post) => {
+                                    const mood = moods.filter((mood) => post.mood_id === mood.id)[0];
+                                    return (
                                     <div
                                         key={post.id}
                                         className="flex items-center gap-2"
@@ -67,7 +69,7 @@ const DiaryEdit = ({posts, diary}) => {
                                             <label
                                                 htmlFor={post.id}
                                             >
-                                                <img src={post.mood_id.image_path} />
+                                                <img src={mood.image_path} alt={mood.feeling} />
                                             </label>
                                         </div>
                                         <div className="w-full flex items-center justify-between gap-4">
@@ -76,7 +78,7 @@ const DiaryEdit = ({posts, diary}) => {
                                             <p>{post.created_at}</p>
                                         </div>
                                     </div>
-                                )) }
+                                )} ) }
                         </fieldset>
                     </div>
 

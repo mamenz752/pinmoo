@@ -2,7 +2,6 @@ import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head } from '@inertiajs/react'
 import { useForm } from '@inertiajs/react'
-import { Cloudinary } from '@cloudinary/url-gen'
 import { AdvancedImage } from '@cloudinary/react'
 
 const QuickStatusEdit = ({ user, moods, post, statuses }) => {
@@ -11,12 +10,6 @@ const QuickStatusEdit = ({ user, moods, post, statuses }) => {
     mood_id: post.mood_id,
     comment: '',
     status_id: 1
-  });
-
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-    },
   });
 
   const submitPutPost = (e) => {
@@ -42,7 +35,6 @@ const QuickStatusEdit = ({ user, moods, post, statuses }) => {
               >
                   {
                       moods.map((mood, i) => {
-                          const moodImage = cld.image(mood.image_path);
                           return (
                           <div className='flex flex-col items-center justify-center'>
                               <input
@@ -56,7 +48,7 @@ const QuickStatusEdit = ({ user, moods, post, statuses }) => {
                                   for={mood.feeling}
                               >
                                   <div className='w-20 h-full'>
-                                      <AdvancedImage cldImg={moodImage} />
+                                      <img src={mood.image_path} alt={mood.feeling} />
                                   </div>
                               </label>
                           </div>

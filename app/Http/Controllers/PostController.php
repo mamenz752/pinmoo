@@ -8,6 +8,8 @@ use App\Models\Mood;
 use App\Models\Post;
 use App\Models\Status;
 use Inertia\Inertia;
+// use Cloudinary\Cloudinary;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary as Cloudinary;
 
 class PostController extends Controller
 {
@@ -22,9 +24,16 @@ class PostController extends Controller
 
     public function new(User $user, Mood $mood)
     {
+        // $moods = $mood->get();
+        // $imagesUrl = $moods->map(function ($mood) {
+            // dd($mood);
+            // return Cloudinary::getUrl($mood->image_path);
+        // });
+        // dd($imagesUrl);
         return Inertia::render('Status/QuickStatusModal', [
             'user' => $user->find(auth()->id()),
-            'moods' => $mood->get()
+            'moods' => $mood->get(),
+            // 'imagesUrl' => $imagesUrl
         ]);
     }
 
