@@ -32,6 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware('auth')->group(function() {
     Route::get('/diaries', [DiaryController::class, 'index'])->name('diary.index');
+    Route::get('/diaries/new', [DiaryController::class, 'new'])->name('diary.new');
+    Route::post('/diaries', [DiaryController::class, 'store'])->name('diary.store');
 });
 
 Route::get('/analysis', function () {
