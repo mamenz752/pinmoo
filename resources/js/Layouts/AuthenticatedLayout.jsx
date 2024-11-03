@@ -49,15 +49,19 @@ export default function AuthenticatedLayout({ header, children }) {
             <div className='z-[40] w-full fixed bottom-0 py-4 bg-white'>
                 <ul className='flex items-center justify-center gap-16'>
                     <li className='hover:opacity-60'>
-                        <Link href={route('dashboard')} className='flex flex-col items-center justify-center gap-1'>
-                            <DashboardIcon />
-                            <span className='text-sm'>ホーム</span>
+                        <Link href={route('dashboard')} className='flex flex-col items-center justify-center gap-2'>
+                            <div className='w-6 h-6'>
+                                <DashboardIcon />
+                            </div>
+                            <span className='text-sm text-center'>ホーム</span>
                         </Link>
                     </li>
                     <li className='hover:opacity-60'>
-                        <Link href={route('diary.index')} className='flex flex-col items-center justify-center gap-1'>
-                            <DiaryIcon />
-                            <span className='text-sm'>じぶん日記</span>
+                        <Link href={route('diary.index')} className='flex flex-col items-center justify-center gap-2'>
+                            <div className='w-6 h-6'>
+                                <DiaryIcon />
+                            </div>
+                            <span className='text-sm text-center'>じぶん日記</span>
                         </Link>
                     </li>
                     <li className='text-pi-orange hover:opacity-60'>
@@ -66,15 +70,19 @@ export default function AuthenticatedLayout({ header, children }) {
                         </Link>
                     </li>
                     <li className='hover:opacity-60'>
-                        <Link href={route('analysis')} className='flex flex-col items-center justify-center gap-1'>
-                            <ChartIcon />
-                            <span className='text-sm'>感情グラフ</span>
+                        <Link href={route('analysis')} className='flex flex-col items-center justify-center gap-2'>
+                            <div className='w-6 h-6'>
+                                <ChartIcon />
+                            </div>
+                            <span className='text-sm text-center'>感情グラフ</span>
                         </Link>
                     </li>
                     <li className='hover:opacity-60'>
-                        <Link href={route('profile.edit')} className='flex flex-col items-center justify-center gap-1'>
-                            <ProfileIcon />
-                            <span className='text-sm'>プロフィール</span>
+                        <Link href={route('profile.edit')} className='flex flex-col items-center justify-center gap-2'>
+                            <div className='w-6 h-6'>
+                                <ProfileIcon />
+                            </div>
+                            <span className='text-sm text-center'>プロフィール</span>
                         </Link>
                     </li>
                 </ul>
