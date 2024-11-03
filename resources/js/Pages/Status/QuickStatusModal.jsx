@@ -1,22 +1,21 @@
 import { AdvancedImage } from '@cloudinary/react';
 import React from 'react'
-import { Cloudinary } from '@cloudinary/url-gen';
+import { getMoodUrl } from '../Dashboard';
+// import { Cloudinary } from '@cloudinary/url-gen';
 import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
-export function getMoodUrl(imagePath) {
-    const cld = new Cloudinary({
-        cloud: {
-            cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-        },
-    });
-    const MoodImageUrl = cld.image(imagePath);
-    return MoodImageUrl;
-}
+// export function getMoodUrl(imagePath) {
+//     const cld = new Cloudinary({
+//         cloud: {
+//             cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+//         },
+//     });
+//     const MoodImageUrl = cld.image(imagePath);
+//     return MoodImageUrl;
+// }
 
-const QuickStatusModal = (props) => {
-    const { user, moods } = props;
-
+const QuickStatusModal = ({user, moods}) => {
     const {data, setData, post} = useForm({
         user_id: user.id,
         mood_id: 1,
@@ -53,7 +52,6 @@ const QuickStatusModal = (props) => {
                         >
                             {
                                 moods.map((mood, i) => {
-                                    return (
                                     <div className='flex flex-col items-center justify-center'>
                                         <input
                                             id={mood.feeling}
@@ -70,7 +68,6 @@ const QuickStatusModal = (props) => {
                                             </div>
                                         </label>
                                     </div>
-                                    )
                                 })
                             }
                         </fieldset>
