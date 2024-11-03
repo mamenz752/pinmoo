@@ -4,6 +4,16 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
+export function getMoodUrl(imagePath) {
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+        },
+    });
+    const MoodImageUrl = cld.image(imagePath);
+    return MoodImageUrl;
+}
+
 const QuickStatusModal = (props) => {
     const { user, moods } = props;
 
@@ -16,13 +26,6 @@ const QuickStatusModal = (props) => {
         e.preventDefault();
         post(route('posts.store'), data);
     }
-
-    // Cloudinary Config
-    const cld = new Cloudinary({
-        cloud: {
-          cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-        },
-      });
 
   return (
     <AuthenticatedLayout>
@@ -50,7 +53,6 @@ const QuickStatusModal = (props) => {
                         >
                             {
                                 moods.map((mood, i) => {
-                                    const moodImage = cld.image(mood.image_path);
                                     return (
                                     <div className='flex flex-col items-center justify-center'>
                                         <input
@@ -64,7 +66,7 @@ const QuickStatusModal = (props) => {
                                             for={mood.feeling}
                                         >
                                             <div className='w-20 h-full'>
-                                                <AdvancedImage cldImg={moodImage} />
+                                                <AdvancedImage cldImg={getMoodUrl(mood.image_path)} />
                                             </div>
                                         </label>
                                     </div>
