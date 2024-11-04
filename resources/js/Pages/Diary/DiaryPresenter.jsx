@@ -38,7 +38,7 @@ const DiaryPresenter = ({ diaries }) => {
                     diaries.map((diary, i) => {
                         return (
                         <div
-                          className="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg"
+                          className="mt-4 p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg"
                           key={i}
                         >
                           <div className='m-2 pb-4 flex items-center justify-between border-b border-gray-200'>
@@ -46,7 +46,7 @@ const DiaryPresenter = ({ diaries }) => {
                               <div className='flex gap-4'>
                                 <button>
                                   <Link href={route('diary.edit', diary.id)}>
-                                      <div className={`w-8 h-8 hover:opacity-60 ${changeStarColor(diary.isStar)}`}>
+                                      <div className={`w-8 h-8 hover:opacity-60 ${changeStarColor(diary.is_star)}`}>
                                         <DiaryStarIcon />
                                       </div>
                                   </Link>
