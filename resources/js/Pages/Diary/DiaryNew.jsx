@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
-const New = ({ posts, moods }) => {
+const DiaryNew = ({ posts, moods }) => {
     const {data, setData, post} = useForm({
         'title': '',
         'body': '',
@@ -87,4 +87,4 @@ const New = ({ posts, moods }) => {
   )
 }
 
-export default New
+export default DiaryNew
