@@ -30,7 +30,7 @@ class PostController extends Controller
             // return Cloudinary::getUrl($mood->image_path);
         // });
         // dd($imagesUrl);
-        return Inertia::render('Status/QuickStatusModal', [
+        return Inertia::render('Post/PostNew', [
             'user' => $user->find(auth()->id()),
             'moods' => $mood->get(),
             // 'imagesUrl' => $imagesUrl
@@ -51,7 +51,7 @@ class PostController extends Controller
 
     public function edit(Request $request, User $user, Mood $mood, Post $post, Status $status)
     {
-        return Inertia::render('Status/Edit', [
+        return Inertia::render('Post/PostEdit', [
             'user' => $user->find(auth()->id()),
             'moods' => $mood->get(),
             'post' => $post->find($request->id),
