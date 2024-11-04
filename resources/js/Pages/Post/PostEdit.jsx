@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import LockIcon from '@/Icons/LockIcon'
 import UnlockIcon from '@/Icons/UnlockIcon'
 import { Head, Link, useForm } from '@inertiajs/react'
 
-const PostEdit = ({ user, moods, post, statuses }) => {
+const PostEdit = ({ user, moods, post, statuses, postStatus }) => {
+const [statusIds, setStatusIds] = useState(postStatus.map((post) => post.status_id).sort());
   const {data, setData, put} = useForm({
     user_id: user.id,
     mood_id: post.mood_id,
-    comment: '',
-    status_id: 1
+    comment: post.comment,
+    status_id: postStatus.map((post) => post.status_id).sort()
   });
-
+  
+//   console.log(statusIds);
+  
+  const handleStatusChange = (e) => {
+      const value = parseInt(e.target.value);
+      if (statusIds.includes(value)) {
+            setStatusIds(prevStatusIds => prevStatusIds.filter((id) => id !== value));
+        } else {
+            setStatusIds(prevStatusIds => [...prevStatusIds, value]);
+        }
+        return statusIds;
+  }
+  
   const submitPutPost = (e) => {
-    e.preventDefault();
-    console.log(data);
-    put(route('posts.update', post.id));
+      e.preventDefault();
+        put(route('posts.update', post.id));
   }
 
   const translateJapanese = (feeling) => {
@@ -160,7 +172,8 @@ const translateStatusToJapanese = (status) => {
             </div>
           <fieldset
                   name='status_id'
-                  onChange={(e) => setData('status_id', e.target.value)}
+                    //   FIXME: onChange：最後の1要素が記録できない
+                  onChange={(e) => { setData('status_id', handleStatusChange(e));}}
                   className='my-4 grid grid-cols-5 gap-2'
                   >
                   {
@@ -171,11 +184,11 @@ const translateStatusToJapanese = (status) => {
                                 key={i}
                             >
                               <input
-                                  id={status.feeling}
-                                  type='radio'
+                                  id={status.status}
+                                  type='checkbox'
                                   name='status_id'
                                   value={status.id}
-                                  defaultValue={data.status_id === post.status_id ? true : false}
+                                  defaultChecked={ statusIds.includes(status.id) }
                               />
                               <label
                                     for={status.status}

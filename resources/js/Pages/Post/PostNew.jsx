@@ -1,7 +1,7 @@
 import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import HeartPulseIcon from '@/Icons/HeartPulseIcon';
-import { useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 
 const PostNew = ({ user, moods }) => {
     const {data, setData, post} = useForm({

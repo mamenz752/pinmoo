@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Mood;
 use App\Models\Post;
 use App\Models\Status;
+use App\Models\PostStatus;
 use Inertia\Inertia;
 // use Cloudinary\Cloudinary;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary as Cloudinary;
@@ -49,13 +50,14 @@ class PostController extends Controller
         return redirect(route('dashboard'));
     }
 
-    public function edit(Request $request, User $user, Mood $mood, Post $post, Status $status)
+    public function edit(Request $request, User $user, Mood $mood, Post $post, Status $status, PostStatus $post_status)
     {
         return Inertia::render('Post/PostEdit', [
             'user' => $user->find(auth()->id()),
             'moods' => $mood->get(),
             'post' => $post->find($request->id),
-            "statuses" => $status->get()
+            "statuses" => $status->get(),
+            "postStatus" => $post_status->where('post_id', $request->id)->get()
         ]);
     }
 
@@ -65,11 +67,24 @@ class PostController extends Controller
             'mood_id' => 'required',
             'user_id' => 'required'
         ]);
+        
+        $input = $request->all();
+        $statusIds = $request->input('status_id', []);
 
         $post = $post->find($request->id);
-        $input = $request->all();
-        $post->statuses()->attach($request->status_id);
         $post->update($input);
+
+        $currentStatusIds = $post->statuses()->pluck('status_id')->toArray();
+        $statusIdsToAttach = array_diff($statusIds, $currentStatusIds);
+        $statusIdsToDetach = array_diff($currentStatusIds, $statusIds);
+
+        foreach ($statusIdsToAttach as $statusId) {
+            $post->statuses()->attach($statusId);
+        }
+        foreach ($statusIdsToDetach as $statusId) {
+            $post->statuses()->detach($statusId);
+        }
+
         return redirect(route('dashboard'));
     }
 }
