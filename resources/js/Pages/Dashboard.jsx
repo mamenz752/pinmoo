@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import EditIcon from '@/Icons/EditIcon';
+import PostEditIcon from '@/Icons/PostEditIcon';
 import { Head, Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
@@ -41,7 +41,7 @@ export default function Dashboard({user, moods, newPost}) {
                                         href={route('posts.edit', newPost.id)}
                                         className='text-gray-600 hover:opacity-80'
                                     >
-                                        <EditIcon />
+                                        <PostEditIcon />
                                     </Link>
                                 :   <></>
                             }
@@ -74,7 +74,7 @@ export default function Dashboard({user, moods, newPost}) {
                                         href={route('posts.edit', newPost.id)}
                                         className='text-gray-600 hover:opacity-80'
                                     >
-                                        <EditIcon />
+                                        <PostEditIcon />
                                     </Link>
                                 :   <></>
                             }

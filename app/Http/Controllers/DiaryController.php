@@ -19,7 +19,7 @@ class DiaryController extends Controller
 
     public function new(Post $post, Mood $mood)
     {
-        return Inertia::render('Diary/New', [
+        return Inertia::render('Diary/DiaryNew', [
             'posts' => $post->get(),
             'moods' => $mood->get()
         ]);
