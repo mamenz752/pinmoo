@@ -1,9 +1,9 @@
-import Logo from '../../../public/Logo';
-import DashboardIcon from '../../../public/icons/DashboardIcon';
-import DiaryIcon from '../../../public/icons/DiaryIcon';
-import SmileIcon from '../../../public/icons/SmileIcon';
-import ChartIcon from '../../../public/icons/ChartIcon';
-import ProfileIcon from '../../../public/icons/ProfileIcon';
+import Logo from '@/Icons/Logo';
+import DashboardIcon from '@/Icons/DashboardIcon';
+import DiaryIcon from '@/Icons/DiaryIcon';
+import SmileIcon from '@/Icons/SmileIcon';
+import ChartIcon from '@/Icons/ChartIcon';
+import ProfileIcon from '@/Icons/ProfileIcon';
 import { Link, usePage } from '@inertiajs/react';
 
 export default function AuthenticatedLayout({ header, children }) {
@@ -11,7 +11,7 @@ export default function AuthenticatedLayout({ header, children }) {
     
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
+            <nav className="border-b border-gray-100 bg-white sticky">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">

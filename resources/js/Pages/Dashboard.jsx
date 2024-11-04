@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-import EditIcon from '../../../public/icons/EditIcon';
+import EditIcon from '../Icons/EditIcon';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedImage } from '@cloudinary/react';
 import { useEffect, useState } from 'react';
