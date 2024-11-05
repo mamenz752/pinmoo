@@ -50,6 +50,7 @@ class User extends Authenticatable
         ];
     }
 
+    // following
     public function followees(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id');

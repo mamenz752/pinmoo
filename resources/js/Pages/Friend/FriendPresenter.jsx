@@ -2,9 +2,29 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
-const FriendPresenter = ({findUsers, requestUsers}) => {
+const FriendPresenter = ({findUsers, requestUsers, message}) => {
+    const {data, setData, post} = useForm({
+        followee_id: '',
+        follower_id: '',
+        unfollow_id: ''
+    });
     const [searchUsername, setSearchUsername] = useState('');
-    const [isRequestUser, setIsRequestUser] =useState(null);
+    // const [isRequestUser, setIsRequestUser] =useState(null);
+
+    const submitFollowInfo = (e) => {
+        e.preventDefault();
+        post(route('friends.follow'), data);
+    }
+
+    const acceptFollowRequest = (e) => {
+        e.preventDefault();
+        post(route('friends.accept'), data);
+    }
+
+    const rejectFollowRequest = (e) => {
+        e.preventDefault();
+        post(route('friends.unfollow'), data);
+    }
 
     // if (!isFindUser) {
     //     return <div>Loading...</div>;
@@ -31,9 +51,11 @@ const FriendPresenter = ({findUsers, requestUsers}) => {
             // setIsFindUser(findUser);
             console.log(findUsers);
         }
+        if (message) {
+            console.log(message);
+        }
         if (requestUsers) {
-            setIsRequestUser(requestUsers);
-            console.log(isRequestUser);
+            console.log(requestUsers);
         }
     }, [])
 
@@ -65,16 +87,20 @@ const FriendPresenter = ({findUsers, requestUsers}) => {
                 findUsers.length ?
                     findUsers.map((findUser) => {
                         return (
-                        <div className='my-4'>
+                        <form
+                            className='my-4'
+                            onSubmit={submitFollowInfo}
+                        >
                             <p>{findUser.username}</p>
                             <button
+                                name='followee_id'
+                                onClick={(e) => setData('followee_id', findUser.id)}
                                 type='submit'
-                                onSubmit={route('friends.request', {id: findUser.id})}
                                 className='bg-blue-500 hover:bg-blue-700 text-white'
                             >
                                 <p>ともだち申請</p>
                             </button>
-                        </div>
+                        </form>
                         )
                     })
                  :
@@ -84,24 +110,33 @@ const FriendPresenter = ({findUsers, requestUsers}) => {
             <div>
                 <p>フォローリクエスト</p>
                 {
-                    isRequestUser ?
-                        isRequestUser.map((user) => (
+                    requestUsers ?
+                        requestUsers.map((user) => (
                             <div key={user.id} className='my-4'>
                                 {user.username}
-                                <Link
-                                    method='post'
-                                    href={route('friends.accept', {id: user.id})}
-                                    className='bg-blue-500 hover:bg-blue-700 text-white'
+                                <form
+                                    onSubmit={acceptFollowRequest}
                                 >
-                                    承認
-                                </Link>
-                                <Link
-                                    method='post'
-                                    href={route('friends.reject', {id: user.id})}
-                                    className='bg-blue-500 hover:bg-blue-700 text-white'
+                                    <button
+                                        name='follower_id'
+                                        onClick={(e) => setData('follower_id', user.id)}
+                                        type='submit'
+                                        className='bg-blue-500 hover:bg-blue-700 text-white'
+                                    >
+                                        承認
+                                    </button>
+                                </form>
+                                <form
+                                    onSubmit={rejectFollowRequest}
                                 >
-                                    拒否
-                                </Link>
+                                    <button
+                                        onClick={(e) => setData('unfollow_id', user.id)}
+                                        type='submit'
+                                        className='bg-blue-500 hover:bg-blue-700 text-white'
+                                    >
+                                        拒否
+                                    </button>
+                                </form>
                             </div>
                         ))
                     :

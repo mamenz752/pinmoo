@@ -52,10 +52,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function (){
     Route::get('/friends', [FriendController::class, 'index'])->name('friends.index');
-    // Route::get('/friends/search', [FriendController::class, 'search'])->name('friends.search');
-    Route::post('/friends/{id}/request', [FriendController::class, 'request'])->name('friends.request');
-    Route::post('/friends/{id}/accept', [FriendController::class, 'accept'])->name('friends.accept');
-    Route::post('/friends/{id}/reject', [FriendController::class, 'reject'])->name('friends.reject');
+    Route::post('/friends/follow', [FriendController::class, 'follow'])->name('friends.follow');
+    
+    Route::post('/friends/accept', [FriendController::class, 'accept'])->name('friends.accept');
+    Route::post('/friends/unfollow', [FriendController::class, 'unfollow'])->name('friends.unfollow');
 });
 
 // Api routes
