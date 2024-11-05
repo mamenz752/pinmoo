@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Mood;
 use App\Models\Post;
 use App\Models\Status;
-// use App\Models\Follow;
 use App\Models\PostStatus;
 use Inertia\Inertia;
 // use Cloudinary\Cloudinary;

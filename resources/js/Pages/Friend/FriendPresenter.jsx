@@ -2,14 +2,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
-const FriendPresenter = ({findUsers, requestUsers, message}) => {
+const FriendPresenter = ({findUsers, requestUsers}) => {
     const {data, setData, post} = useForm({
         followee_id: '',
         follower_id: '',
         unfollow_id: ''
     });
     const [searchUsername, setSearchUsername] = useState('');
-    // const [isRequestUser, setIsRequestUser] =useState(null);
 
     const submitFollowInfo = (e) => {
         e.preventDefault();
@@ -25,39 +24,6 @@ const FriendPresenter = ({findUsers, requestUsers, message}) => {
         e.preventDefault();
         post(route('friends.unfollow'), data);
     }
-
-    // if (!isFindUser) {
-    //     return <div>Loading...</div>;
-    // }
-
-    // const {data, setData, post} = useForm({
-    //     username: ''
-    // })
-
-    // const searchByUsername = async (e) => {
-    //     e.preventDefault();
-    //     console.log(data);
-    //     try {
-    //         const res = post(route('friends.search'));
-    //             console.log(res.findUser);
-    //             setIsFindUser(res.findUser);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    useEffect(() => {
-        if (findUsers) {
-            // setIsFindUser(findUser);
-            console.log(findUsers);
-        }
-        if (message) {
-            console.log(message);
-        }
-        if (requestUsers) {
-            console.log(requestUsers);
-        }
-    }, [])
 
   return (
     <AuthenticatedLayout
