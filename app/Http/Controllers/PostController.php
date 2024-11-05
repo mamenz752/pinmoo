@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Mood;
 use App\Models\Post;
@@ -16,10 +17,23 @@ class PostController extends Controller
 {
     public function index(User $user, Mood $mood, Post $post)
     {
+        $user = $user->find(auth()->id());
+        $friends = User::whereHas('followees', function($query) use ($user) {
+            $query->where('followee_id', $user->id);
+        })
+        ->whereHas('followers', function($query) use ($user) {
+            $query->where('follower_id', $user->id);
+        })
+        ->get();
+        // dd($friends);
         return Inertia::render('Dashboard', [
-            "user" => $user->find(auth()->id()),
+            "user" => $user,
             "moods" => $mood->get(),
-            "newPost" => $post->orderby('created_at', 'desc')->first()
+            "newPost" => $post->where('user_id', $user->id)->orderby('created_at', 'desc')->first(),
+            "friends" => $friends,
+            "friendsPosts" => $friends->map(function ($friend) use ($post) {
+                return $post->where('user_id', $friend->id)->orderby('created_at', 'desc')->first();
+            }),
         ]);
     }
 
