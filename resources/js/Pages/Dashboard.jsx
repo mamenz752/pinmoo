@@ -50,6 +50,17 @@ export default function Dashboard({user, moods, newPost}) {
                 </div>
             </div>
 
+            <div>
+                <button>
+                    <Link
+                        href={route('friends.index')}
+                        className='bg-blue-500 hover:bg-blue-700 text-white'
+                    >
+                        ともだちを探すページに移動
+                    </Link>
+                </button>
+            </div>
+
             <div className="my-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <h1 className='mt-4 text-xl tracking-wider font-bold'>ともだちの気分</h1>
                 <div className="mt-4 p-4 flex justify-between items-center bg-white shadow-sm sm:rounded-lg">

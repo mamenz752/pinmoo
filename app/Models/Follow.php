@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Follow extends Model
 {
-    $fillable = [
+    protected $fillable = [
         "followee_id",
         "follower_id"
     ];

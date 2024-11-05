@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DiaryController;
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\Api\V1\MoodController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -49,10 +50,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function (){
+    Route::get('/friends', [FriendController::class, 'index'])->name('friends.index');
+    // Route::get('/friends/search', [FriendController::class, 'search'])->name('friends.search');
+    Route::post('/friends/{id}/request', [FriendController::class, 'request'])->name('friends.request');
+    Route::post('/friends/{id}/accept', [FriendController::class, 'accept'])->name('friends.accept');
+    Route::post('/friends/{id}/reject', [FriendController::class, 'reject'])->name('friends.reject');
+});
+
 // Api routes
 
-Route::middleware('auth')->group(function () {
-    Route::get('api/v1/get-all-moods', [MoodController::class, 'getAllMoods']);
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('api/v1/get-all-moods', [MoodController::class, 'getAllMoods']);
+// });
 
 require __DIR__.'/auth.php';
