@@ -123,6 +123,7 @@ const FriendPresenter = ({findUsers, requestUsers}) => {
                                         onSubmit={rejectFollowRequest}
                                     >
                                         <button
+                                            name='unfollow_id'
                                             onClick={(e) => setData('unfollow_id', user.id)}
                                             type='submit'
                                             className='text-pi-red hover:opacity-60'

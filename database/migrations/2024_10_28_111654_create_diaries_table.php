@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->boolean('is_star');
-            $table->foreignId('post_id')->constrained()->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('post_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

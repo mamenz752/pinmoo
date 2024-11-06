@@ -11,6 +11,7 @@ class Diary extends Model
         "title",
         "body",
         "is_star",
+        "user_id",
         "post_id"
     ];
 
