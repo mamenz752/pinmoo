@@ -33,6 +33,9 @@ class PostController extends Controller
         
         $liked_post_ids = $user->likePosts()->pluck('post_id')->toArray();
         $is_liked = $friend_posts->map(function ($post) use ($liked_post_ids) {
+            if (is_null($post)) {
+                return false;
+            }
             return in_array($post->id, $liked_post_ids);
         })->toArray();
         // dd($is_liked);
