@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 
 export default function Dashboard({user, moods, newPost, friends, friendsPosts, isLiked}) {
     const [currentMood, setCurrentMood] = useState();
-    // const [friendsMood, setFriendsMood] = useState();
     const {data, setData, post} = useForm({
         post_id: '',
     });
@@ -15,9 +14,6 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
         if (newPost) {
             setCurrentMood(moods.filter(mood => mood.id === newPost.mood_id)[0]);
         }
-        // if (friendsPosts) {
-        //     setFriendsMood(friendsPosts.map(post => moods.filter(mood => mood.id === post.mood_id)[0]));
-        // }
     }, [])
 
     const handleLikePost = (e) => {
@@ -76,17 +72,6 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
                 </div>
             </div>
 
-            <div>
-                <button>
-                    <Link
-                        href={route('friends.index')}
-                        className='bg-blue-500 hover:bg-blue-700 text-white'
-                    >
-                        ともだちを探すページに移動
-                    </Link>
-                </button>
-            </div>
-
             <div className="my-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <h1 className='mt-4 text-xl tracking-wider font-bold'>ともだちの気分</h1>
                 {
@@ -94,8 +79,6 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
                     friendsPosts.map((post, i) => {
                         const user = friends.filter(friend => friend.id === post.user_id)[0];
                         const mood = moods.filter(mood => mood.id === post.mood_id)[0];
-                        // const is_liked = isLiked.filter(like => like.post_id === post.id)[0];
-                        console.log(mood);
                         return (
                             <div className="mt-4 p-4 flex justify-between items-center bg-white shadow-sm sm:rounded-lg">
                                 <p>{user.username}</p>
