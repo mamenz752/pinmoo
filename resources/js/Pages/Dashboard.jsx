@@ -102,6 +102,7 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
                                                     onSubmit={handleLikePost}
                                                 >
                                                     <button
+                                                        name='post_id'
                                                         onClick={(e) => setData('post_id', post.id)}
                                                     >
                                                         <div
