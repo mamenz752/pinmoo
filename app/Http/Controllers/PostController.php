@@ -18,6 +18,7 @@ class PostController extends Controller
     public function index(User $user, Mood $mood, Post $post)
     {
         $user = $user->find(auth()->id());
+
         $friends = User::whereHas('followees', function($query) use ($user) {
             $query->where('followee_id', $user->id);
         })
@@ -25,15 +26,24 @@ class PostController extends Controller
             $query->where('follower_id', $user->id);
         })
         ->get();
-        // dd($friends);
+
+        $friend_posts = $friends->map(function ($friend) use ($post) {
+            return $post->where('user_id', $friend->id)->orderby('created_at', 'desc')->first();
+        });
+        
+        $liked_post_ids = $user->likePosts()->pluck('post_id')->toArray();
+        $is_liked = $friend_posts->map(function ($post) use ($liked_post_ids) {
+            return in_array($post->id, $liked_post_ids);
+        })->toArray();
+        // dd($is_liked);
+
         return Inertia::render('Dashboard', [
             "user" => $user,
             "moods" => $mood->get(),
             "newPost" => $post->where('user_id', $user->id)->orderby('created_at', 'desc')->first(),
             "friends" => $friends,
-            "friendsPosts" => $friends->map(function ($friend) use ($post) {
-                return $post->where('user_id', $friend->id)->orderby('created_at', 'desc')->first();
-            }),
+            "friendsPosts" => $friend_posts,
+            "isLiked" => $is_liked
         ]);
     }
 

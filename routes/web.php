@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\Api\V1\MoodController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/likes', [LikeController::class, 'index'])->name('likes');
 });
 
 Route::middleware('auth')->group(function() {
