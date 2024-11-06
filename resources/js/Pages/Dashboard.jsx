@@ -75,7 +75,7 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
             <div className="my-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <h1 className='mt-4 text-xl tracking-wider font-bold'>ともだちの気分</h1>
                 {
-                    friendsPosts.length ?
+                    friendsPosts[0] != null || friendsPosts[0] != undefined ?
                     friendsPosts.map((post, i) => {
                         const user = friends.filter(friend => friend.id === post.user_id)[0];
                         const mood = moods.filter(mood => mood.id === post.mood_id)[0];

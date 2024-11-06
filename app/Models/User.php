@@ -65,6 +65,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class)->chaperone();
     }
+    
+    public function diaries(): HasMany
+    {
+        return $this->hasMany(Post::class)->chaperone();
+    }
 
     public function likePosts(): BelongsToMany
     {
