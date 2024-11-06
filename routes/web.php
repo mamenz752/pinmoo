@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DiaryController;
+use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\Api\V1\MoodController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +32,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('/likes', [LikeController::class, 'index'])->name('likes');
+});
+
 Route::middleware('auth')->group(function() {
     Route::get('/diaries', [DiaryController::class, 'index'])->name('diary.index');
     Route::get('/diaries/new', [DiaryController::class, 'new'])->name('diary.new');
@@ -49,10 +55,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function (){
+    Route::get('/friends', [FriendController::class, 'index'])->name('friends.index');
+    Route::post('/friends/follow', [FriendController::class, 'follow'])->name('friends.follow');
+    
+    Route::post('/friends/accept', [FriendController::class, 'accept'])->name('friends.accept');
+    Route::post('/friends/unfollow', [FriendController::class, 'unfollow'])->name('friends.unfollow');
+});
+
 // Api routes
 
-Route::middleware('auth')->group(function () {
-    Route::get('api/v1/get-all-moods', [MoodController::class, 'getAllMoods']);
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('api/v1/get-all-moods', [MoodController::class, 'getAllMoods']);
+// });
 
 require __DIR__.'/auth.php';

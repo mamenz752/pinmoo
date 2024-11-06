@@ -5,6 +5,7 @@ import DiaryIcon from '@/Icons/DiaryIcon';
 import SmileIcon from '@/Icons/SmileIcon';
 import ChartIcon from '@/Icons/ChartIcon';
 import ProfileIcon from '@/Icons/ProfileIcon';
+import UserMenuIcon from '@/Icons/UserMenuIcon';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
@@ -26,17 +27,25 @@ export default function AuthenticatedLayout({ header, children }) {
                             </h2>
                         </div>
 
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div className="relative ms-3">
-                                <span className="inline-flex rounded-md">
-                                    <button
-                                        type="button"
-                                        className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 transition duration-150 ease-in-out focus:outline-none"
-                                    >
-                                        {user.name}
-                                    </button>
-                                </span>
+                        <div className="w-1/5 flex items-center justify-center gap-4">
+                            <div className='flex items-center justify-center w-full h-full'>
+                                <Link href={route('friends.index')} className='flex flex-col items-center justify-center'>
+                                        <div className='w-8 h-8 text-gray-400 hover:text-gray-600'>
+                                            <UserMenuIcon />
+                                        </div>
+                                        <div>
+                                            <span className='text-sm text-center'>ともだち</span>
+                                        </div>
+                                </Link>
                             </div>
+                            <span className="w-full inline-flex rounded-md">
+                                <button
+                                    type="button"
+                                    className="w-full inline-flex items-center justify-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 transition duration-150 ease-in-out focus:outline-none"
+                                >
+                                    {user.name}
+                                </button>
+                            </span>
                         </div>
                     </div>
                 </div>
