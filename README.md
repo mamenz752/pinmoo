@@ -59,7 +59,13 @@ Coming soon...
 ### DB 関連を起動
 
 ```
-$ sail up -d
+$ ./vendor/bin/sail up -d
+```
+
+### DB 関連のマイグレーション・シーディング
+
+```
+$ ./vendor/bin/sail artisan migrate --seed
 ```
 
 ### サーバの起動
