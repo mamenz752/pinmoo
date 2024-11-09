@@ -68,6 +68,14 @@ $ ./vendor/bin/sail up -d
 $ ./vendor/bin/sail artisan migrate --seed
 ```
 
+### Composer 関連モジュールのインストール
+
+#### モジュールをインストールする
+
+```
+$ ./vendor/bin/sail composer install
+```
+
 ### サーバの起動
 
 #### モジュールをインストールする
