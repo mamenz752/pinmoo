@@ -38,7 +38,7 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
     const translateJapanese = (feeling) => {
         switch (feeling) {
             case 'angry':
-                return 'ぷんぷん';
+                return 'いらいら';
             case 'sad':
                 return 'えーん';
             case 'scared':

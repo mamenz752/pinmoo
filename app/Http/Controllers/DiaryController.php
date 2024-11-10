@@ -11,18 +11,21 @@ use Inertia\Inertia;
 
 class DiaryController extends Controller
 {
-    public function index(Diary $diary, User $user)
+    public function index(Diary $diary, User $user, Mood $mood, Post $post)
     {
         $user = $user->find(auth()->id());
         return Inertia::render('Diary/DiaryPresenter', [
             'diaries' => $diary->where('user_id', $user->id)->get(),
+            'moods' => $mood->get(),
+            'posts' => $post->where('user_id', $user->id)->get()
         ]);
     }
 
-    public function new(Post $post, Mood $mood)
+    public function new(Post $post, Mood $mood, User $user)
     {
+        $user = $user->find(auth()->id());
         return Inertia::render('Diary/DiaryNew', [
-            'posts' => $post->get(),
+            'posts' => $post->where('user_id', $user->id)->get(),
             'moods' => $mood->get()
         ]);
     }
@@ -41,10 +44,11 @@ class DiaryController extends Controller
         return redirect(route('diary.index'));
     }
 
-    public function edit(Request $request, Post $post, Diary $diary, Mood $mood)
+    public function edit(Request $request, Post $post, Diary $diary, Mood $mood, User $user)
     {
+        $user = $user->find(auth()->id());
         return Inertia::render('Diary/DiaryEdit', [
-            'posts' => $post->get(),
+            'posts' => $post->where('user_id', $user->id)->get(),
             'diary' => $diary->where('id', $request->id)->first(),
             'moods' => $mood->get()
         ]);
