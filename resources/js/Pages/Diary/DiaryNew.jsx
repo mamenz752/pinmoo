@@ -29,7 +29,7 @@ const DiaryNew = ({ posts, moods }) => {
     const translateJapanese = (feeling) => {
         switch (feeling) {
             case 'angry':
-                return 'ぷんぷん';
+                return 'いらいら';
             case 'sad':
                 return 'えーん';
             case 'scared':
