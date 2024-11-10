@@ -59,10 +59,30 @@ Coming soon...
 ### DB 関連を起動
 
 ```
-$ sail up -d
+$ ./vendor/bin/sail up -d
+```
+
+### DB 関連のマイグレーション・シーディング
+
+```
+$ ./vendor/bin/sail artisan migrate --seed
+```
+
+### Composer 関連モジュールのインストール
+
+#### モジュールをインストールする
+
+```
+$ ./vendor/bin/sail composer install
 ```
 
 ### サーバの起動
+
+#### モジュールをインストールする
+
+```
+$ npm install
+```
 
 #### React をビルドする
 

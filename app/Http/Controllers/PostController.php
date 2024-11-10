@@ -9,13 +9,14 @@ use App\Models\Mood;
 use App\Models\Post;
 use App\Models\Status;
 use App\Models\PostStatus;
+use App\Models\Like;
 use Inertia\Inertia;
 // use Cloudinary\Cloudinary;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary as Cloudinary;
 
 class PostController extends Controller
 {
-    public function index(User $user, Mood $mood, Post $post)
+    public function index(User $user, Mood $mood, Post $post, Like $like)
     {
         $user = $user->find(auth()->id());
 
@@ -30,6 +31,22 @@ class PostController extends Controller
         $friend_posts = $friends->map(function ($friend) use ($post) {
             return $post->where('user_id', $friend->id)->orderby('created_at', 'desc')->first();
         });
+
+        $latest_post = $post->where('user_id', $user->id)->orderby('created_at', 'desc')->first();
+        if ($latest_post === null) {
+            $like_user_ids = [];
+            $like_users = [];
+            $like_count = 0;
+        } else {
+            $like_user_ids = $like->where('post_id', $latest_post->id)->get();
+            $like_users = $like_user_ids->map(function ($like_user) {
+                if (is_null($like_user)) {
+                    return false;
+                }
+                return User::find($like_user->user_id);
+            });
+            $like_count = $like->where('post_id', $latest_post->id)->count();
+        }
         
         $liked_post_ids = $user->likePosts()->pluck('post_id')->toArray();
         $is_liked = $friend_posts->map(function ($post) use ($liked_post_ids) {
@@ -38,7 +55,6 @@ class PostController extends Controller
             }
             return in_array($post->id, $liked_post_ids);
         })->toArray();
-        // dd($is_liked);
 
         return Inertia::render('Dashboard', [
             "user" => $user,
@@ -46,6 +62,8 @@ class PostController extends Controller
             "newPost" => $post->where('user_id', $user->id)->orderby('created_at', 'desc')->first(),
             "friends" => $friends,
             "friendsPosts" => $friend_posts,
+            "likeUsers" => $like_users,
+            "likeCount" => $like_count,
             "isLiked" => $is_liked
         ]);
     }
