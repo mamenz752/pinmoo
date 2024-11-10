@@ -121,7 +121,6 @@ const DiaryEdit = ({posts, diary, moods}) => {
                         </div>
                     </div>
 
-                    {/* TODO: リレーションのcheckedを引き継ぐ */}
                     <div className='bg-white mt-4 p-4 overflow-hidden shadow-sm sm:rounded-lg'>
                         <label
                             htmlFor="post_id"
@@ -143,11 +142,12 @@ const DiaryEdit = ({posts, diary, moods}) => {
                                     >
                                         <div className='w-full flex items-center gap-2'>
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 id={post.id}
                                                 className="w-4 h-4 vertical-align-middle"
                                                 name="post_id"
                                                 value={post.id}
+                                                defaultChecked={post.id === data.post_id}
                                             />
                                             <label
                                                 htmlFor={post.id}
