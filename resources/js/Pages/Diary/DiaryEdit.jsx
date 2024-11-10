@@ -170,6 +170,16 @@ const DiaryEdit = ({posts, diary, moods}) => {
                     >
                         変更を保存する
                     </button>
+                    <Link
+                        href={route('diary.destroy', diary.id)}
+                        method='delete'
+                    >
+                        <button
+                            className='mt-4 py-2 px-4 w-full rounded-md font-bold shadow-sm hover:opacity-80 flex justify-center items-center gap-2 text-white bg-pi-red'
+                        >
+                            日記を削除する
+                        </button>
+                    </Link>
                 </form>
             </div>
     </AuthenticatedLayout>
