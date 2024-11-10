@@ -33,6 +33,31 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
         }
     }
 
+    const translateJapanese = (feeling) => {
+        switch (feeling) {
+            case 'angry':
+                return 'ぷんぷん';
+            case 'sad':
+                return 'えーん';
+            case 'scared':
+                return 'ぞくぞく';
+            case 'nervous':
+                return 'どきどき';
+            case 'smile':
+                return 'ほのぼの';
+            case 'surprised':
+                return 'びっくり';
+            case 'wink':
+                return 'にこにこ';
+            case 'joyful':
+                return 'きゃっきゃ';
+            case 'stared':
+                return 'きらきら';
+            case 'love':
+                return 'るんるん';
+        }
+    }
+
     return (
         <AuthenticatedLayout
             header={"ホーム"}
@@ -49,10 +74,15 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
                                 {newPost ? newPost.comment :<></>}
                             </p>
                         </div>
-                        <div className='w-12 h-12'>
+                        <div className='w-20'>
                             {
                                 newPost && currentMood ?
-                                    <img src={currentMood.image_path} alt={currentMood.feeling} />
+                                    <div className='flex flex-col items-center'>
+                                        <div className='w-12 h-12'>
+                                            <img src={currentMood.image_path} alt={currentMood.feeling} />
+                                        </div>
+                                        <span className='text-sm text-center'>{translateJapanese(currentMood.feeling)}</span>
+                                    </div>
                                 : <></>
                             }
                         </div>
@@ -88,10 +118,15 @@ export default function Dashboard({user, moods, newPost, friends, friendsPosts, 
                                             {post ? post.comment :<></>}
                                         </p>
                                     </div>
-                                    <div className='w-12 h-12'>
+                                    <div className='w-20'>
                                         {
                                             post ?
-                                                <img src={mood.image_path} alt={mood.feeling} />
+                                                <div className='flex flex-col items-center'>
+                                                    <div className='w-12 h-12'>
+                                                        <img src={mood.image_path} alt={mood.feeling} />
+                                                    </div>
+                                                    <span className='text-sm text-center'>{translateJapanese(mood.feeling)}</span>
+                                                </div>
                                             : <></>
                                         }
                                     </div>
