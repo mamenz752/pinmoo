@@ -167,7 +167,7 @@ const DiaryNew = ({ posts, moods }) => {
                         type='submit'
                         className='mt-4 py-2 px-4 w-full rounded-md font-bold shadow-sm hover:opacity-80 flex justify-center items-center gap-2 text-white bg-pi-blue'
                     >
-                        変更を保存する
+                        日記を保存する
                     </button>
                 </form>
             </div>
