@@ -11,11 +11,13 @@ use Inertia\Inertia;
 
 class DiaryController extends Controller
 {
-    public function index(Diary $diary, User $user)
+    public function index(Diary $diary, User $user, Mood $mood, Post $post)
     {
         $user = $user->find(auth()->id());
         return Inertia::render('Diary/DiaryPresenter', [
             'diaries' => $diary->where('user_id', $user->id)->get(),
+            'moods' => $mood->get(),
+            'posts' => $post->where('user_id', $user->id)->get()
         ]);
     }
 
