@@ -3,6 +3,8 @@ import PlusIcon from '@/Icons/PlusIcon';
 import DiaryEditIcon from '@/Icons/DiaryEditIcon';
 import DiaryStarIcon from '@/Icons/DiaryStarIcon';
 import { Head, Link } from '@inertiajs/react';
+import dayjs from 'dayjs';
+import ja from 'dayjs/locale/ja';
 
 const DiaryPresenter = ({ diaries }) => {
   const changeStarColor = (isStar) => {
@@ -36,6 +38,7 @@ const DiaryPresenter = ({ diaries }) => {
                 {
                     diaries ?
                     diaries.map((diary, i) => {
+                        const created_at = dayjs(diary.created_at).locale(ja).format('YYYY年MM月DD日 HH時mm分');
                         return (
                         <div
                           className="mt-4 p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg"
@@ -71,7 +74,7 @@ const DiaryPresenter = ({ diaries }) => {
                                 {diary.body}
                               </p>
                               <div className='flex justify-end'>
-                                <p className='text-gray-600'>{diary.created_at}</p>
+                                <p className='text-gray-600'>{created_at}</p>
                               </div>
                             {/* </Link> */}
                           </div>
