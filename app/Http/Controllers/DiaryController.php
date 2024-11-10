@@ -63,4 +63,10 @@ class DiaryController extends Controller
         $diary->where('id', $request->id)->update($input);
         return redirect(route('diary.index'));
     }
+
+    public function destroy(Request $request, Diary $diary)
+    {
+        $diary->where('id', $request->id)->delete();
+        return redirect(route('diary.index'));
+    }
 }

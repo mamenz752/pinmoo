@@ -17,25 +17,25 @@ const PostNew = ({ user, moods }) => {
     const translateJapanese = (feeling) => {
         switch (feeling) {
             case 'angry':
-                return '怒り';
+                return 'ぷんぷん';
             case 'sad':
-                return '悲しみ';
+                return 'えーん';
             case 'scared':
-                return '恐怖';
+                return 'ぞくぞく';
             case 'nervous':
-                return '緊張';
+                return 'どきどき';
             case 'smile':
-                return '穏やか';
+                return 'ほのぼの';
             case 'surprised':
-                return '驚き';
+                return 'びっくり';
             case 'wink':
-                return '順調';
+                return 'にこにこ';
             case 'joyful':
-                return '喜び';
+                return 'きゃっきゃ';
             case 'stared':
-                return '夢中';
+                return 'きらきら';
             case 'love':
-                return '幸せ';
+                return 'るんるん';
         }
     }
 

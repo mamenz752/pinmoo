@@ -40,9 +40,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/diaries', [DiaryController::class, 'index'])->name('diary.index');
     Route::get('/diaries/new', [DiaryController::class, 'new'])->name('diary.new');
     Route::get('/diaries/{id}/edit', [DiaryController::class, 'edit'])->name('diary.edit');
-    Route::get('/diaries/{id}', [DiaryController::class, 'show'])->name('diary.show');
+    // Route::get('/diaries/{id}', [DiaryController::class, 'show'])->name('diary.show');
     Route::put('/diaries/{id}', [DiaryController::class, 'update'])->name('diary.update');
     Route::post('/diaries', [DiaryController::class, 'store'])->name('diary.store');
+    Route::delete('/diaries/{id}', [DiaryController::class, 'destroy'])->name('diary.destroy');
 });
 
 Route::get('/analysis', function () {

@@ -2,6 +2,8 @@ import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import DiaryStarIcon from '@/Icons/DiaryStarIcon';
 import { Head, Link, useForm } from '@inertiajs/react';
+import dayjs from 'dayjs';
+import ja from 'dayjs/locale/ja';
 
 const DiaryEdit = ({posts, diary, moods}) => {
     const {data, setData, put} = useForm({
@@ -27,25 +29,25 @@ const DiaryEdit = ({posts, diary, moods}) => {
     const translateJapanese = (feeling) => {
         switch (feeling) {
             case 'angry':
-                return '怒り';
+                return 'ぷんぷん';
             case 'sad':
-                return '悲しみ';
+                return 'えーん';
             case 'scared':
-                return '恐怖';
+                return 'ぞくぞく';
             case 'nervous':
-                return '緊張';
+                return 'どきどき';
             case 'smile':
-                return '穏やか';
+                return 'ほのぼの';
             case 'surprised':
-                return '驚き';
+                return 'びっくり';
             case 'wink':
-                return '順調';
+                return 'にこにこ';
             case 'joyful':
-                return '喜び';
+                return 'きゃっきゃ';
             case 'stared':
-                return '夢中';
+                return 'きらきら';
             case 'love':
-                return '幸せ';
+                return 'るんるん';
         }
     }
 
@@ -133,6 +135,7 @@ const DiaryEdit = ({posts, diary, moods}) => {
                         >
                                 { posts.map((post) => {
                                     const mood = moods.filter((mood) => post.mood_id === mood.id)[0];
+                                    const created_at = dayjs(post.created_at).locale(ja).format('YYYY年MM月DD日 HH時mm分');
                                     return (
                                     <div
                                         key={post.id}
@@ -157,7 +160,7 @@ const DiaryEdit = ({posts, diary, moods}) => {
                                         </div>
                                         <div className="w-full flex items-center justify-end gap-4">
                                             <p>{post.comment}</p>
-                                            <p>{post.created_at}</p>
+                                            <p>{created_at}</p>
                                         </div>
                                     </div>
                                 )} ) }
@@ -170,6 +173,16 @@ const DiaryEdit = ({posts, diary, moods}) => {
                     >
                         変更を保存する
                     </button>
+                    <Link
+                        href={route('diary.destroy', diary.id)}
+                        method='delete'
+                    >
+                        <button
+                            className='mt-4 py-2 px-4 w-full rounded-md font-bold shadow-sm hover:opacity-80 flex justify-center items-center gap-2 text-white bg-pi-red'
+                        >
+                            日記を削除する
+                        </button>
+                    </Link>
                 </form>
             </div>
     </AuthenticatedLayout>
