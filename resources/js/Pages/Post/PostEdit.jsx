@@ -33,7 +33,7 @@ const [statusIds, setStatusIds] = useState(postStatus.map((post) => post.status_
   const translateJapanese = (feeling) => {
     switch (feeling) {
         case 'angry':
-            return 'ぷんぷん';
+            return 'いらいら';
         case 'sad':
             return 'えーん';
         case 'scared':

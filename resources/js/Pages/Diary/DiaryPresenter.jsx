@@ -6,7 +6,7 @@ import { Head, Link } from '@inertiajs/react';
 import dayjs from 'dayjs';
 import ja from 'dayjs/locale/ja';
 
-const DiaryPresenter = ({ diaries }) => {
+const DiaryPresenter = ({ diaries, moods, posts }) => {
   const changeStarColor = (isStar) => {
     if (isStar) {
       return 'text-pi-orange';
@@ -36,9 +36,10 @@ const DiaryPresenter = ({ diaries }) => {
               <h1 className='mt-4 text-xl tracking-wider font-bold'>今までのじぶん日記</h1>
               <div className='mt-4'>
                 {
-                    diaries ?
+                    diaries.length ?
                     diaries.map((diary, i) => {
-                        const created_at = dayjs(diary.created_at).locale(ja).format('YYYY年MM月DD日 HH時mm分');
+                      const post = diary.post_id == null ? null : posts.filter(post => post.id === diary.post_id)[0];
+                      const mood = diary.post_id == null ? null : moods.filter(mood => mood.id == post.mood_id)[0];
                         return (
                         <div
                           className="mt-4 p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg"
@@ -74,11 +75,25 @@ const DiaryPresenter = ({ diaries }) => {
                                 {diary.body}
                               </p>
                               <div className='flex justify-end'>
-                                <p className='text-gray-600'>{created_at}</p>
+                                <p className='text-gray-600'>{dayjs(diary.created_at).locale(ja).format('YYYY年MM月DD日 HH時mm分')}</p>
                               </div>
                             {/* </Link> */}
                           </div>
-                        </div>
+                          {
+                            diary.post_id != null ?
+                            <div className='border-t border-t-gray-400 p-2 flex items-center '>
+                              <div className='w-16 h-16'>
+                                  <img src={mood.image_path} alt={mood.feeling} />
+                              </div>
+                              <div className="w-full flex items-center justify-end gap-4">
+                                  <p>{post.comment}</p>
+                                  <p className='text-gray-600'>{dayjs(post.created_at).locale(ja).format('YYYY年MM月DD日 HH時mm分')}</p>
+                              </div>
+                            </div>
+                            : <></>
+                          }
+
+                          </div>
                         )
                     }) : <></>
                 }

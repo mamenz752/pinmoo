@@ -29,7 +29,7 @@ const DiaryNew = ({ posts, moods }) => {
     const translateJapanese = (feeling) => {
         switch (feeling) {
             case 'angry':
-                return 'ぷんぷん';
+                return 'いらいら';
             case 'sad':
                 return 'えーん';
             case 'scared':
@@ -142,7 +142,7 @@ const DiaryNew = ({ posts, moods }) => {
                                     >
                                         <div className='w-full flex items-center gap-2'>
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 id={post.id}
                                                 className="w-4 h-4 vertical-align-middle"
                                                 name="post_id"
